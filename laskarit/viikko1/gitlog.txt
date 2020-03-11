@@ -1,0 +1,114 @@
+commit 1465bb1c12aa94774c9aaa90b326028fbae8d3d3
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 17:47:14 2020 +0200
+
+    poistettu file1 ja uudelleennimetty file2
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 1d5fdd5788694037322357b83695c07b86afeec4
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 17:43:12 2020 +0200
+
+    lisätty tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit b9eb3ba1d52651162ad62781010fae45bb32fab3
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 17:10:24 2020 +0200
+
+    muutos patch-muodossa
+
+ eka.txt    | 11 +++++------
+ kolmas.txt |  2 +-
+ 2 files changed, 6 insertions(+), 7 deletions(-)
+
+commit a899bd774d75165450d9a552755f4fe340d4ac1c
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 16:55:43 2020 +0200
+
+    uudelleennimetty tiedosto.txt -> eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 182377df4b46e92b0f3055b7f974ae68754ad5ca
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 16:54:29 2020 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 43c4f48adb18cd4b081d1491df824172f76e9f64
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 16:52:11 2020 +0200
+
+    lisää lorem ipsumia
+
+ tiedosto.txt | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+commit 7d4b3fb39c4985acf6e95d55bab314b42d5383c2
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 16:50:35 2020 +0200
+
+    lorem ipsum
+
+ tiedosto.txt | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit 805d9d0b5b1ec20e99e828950a1ea25f9045980a
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 16:47:16 2020 +0200
+
+    lisätty stuff
+
+ stuff/jokin.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit c8f8d6f403b49151d77bdf8504af758d458ad761
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 16:46:24 2020 +0200
+
+    muokattu toinen.txt ja kolmas.txt
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 7cdd62f08c159f989e0c60c3a768b7aebc76916f
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 16:45:07 2020 +0200
+
+    kolmas.txt lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit ccb554bf30d4340fd0b5683699583e42d67e2435
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 16:43:22 2020 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 1da3f0f881b8ecde75b823fb2722b4f0b853e312
+Author: Tapani Honkanen <tapani.honkanen@hotmail.com>
+Date:   Wed Mar 11 16:38:37 2020 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
