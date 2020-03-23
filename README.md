@@ -1,9 +1,7 @@
 # Ohjelmistotekniikka, harjoitustyö
 
-## Tehtävät
+## Dokumentaatio
 
-### Viikko 1
+[Vaatimusmäärittely](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/vaatimusmaarittely.md)
 
-[gitlog.txt](https://raw.githubusercontent.com/tapanih/ot-harjoitustyo/master/laskarit/viikko1/gitlog.txt)
-
-[komentorivi.txt](https://raw.githubusercontent.com/tapanih/ot-harjoitustyo/master/laskarit/viikko1/komentorivi.txt)
+[Tuntikirjanpito](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/tuntikirjanpito.md)
