@@ -1,9 +1,14 @@
 package pixeleditor.ui;
 
+import java.io.File;
+import java.io.IOException;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Menu;
@@ -12,6 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -21,7 +27,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import pixeleditor.domain.Tool;
 import pixeleditor.domain.ToolService;
 
@@ -46,7 +54,7 @@ public class PixelEditorUi extends Application {
         final Menu fileMenu = new Menu("File");
 
         final MenuItem exportMenuItem = new MenuItem("Export to PNG...");
-        final MenuItem exitMenuItem = new MenuItem("Exit");
+        final MenuItem exitMenuItem = new MenuItem("Exit");  
         fileMenu.getItems().add(exportMenuItem);
         fileMenu.getItems().add(exitMenuItem);
         menuBar.getMenus().add(fileMenu);
@@ -89,6 +97,32 @@ public class PixelEditorUi extends Application {
         borderPane.setTop(hBox);
         borderPane.setLeft(vBox);
         borderPane.setCenter(canvasHolder);
+        
+                
+        exportMenuItem.setOnAction(e -> {
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            WritableImage image = canvas.snapshot(params, null);
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(primaryStage);
+
+            try {
+                if(file != null) {
+                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+                }
+            } catch (IOException ex) {
+                System.out.println(ex.toString());
+            }
+        });
+
+        exitMenuItem.setOnAction(e -> {
+            Platform.exit();
+        });
 
         canvas.setOnMouseClicked(e -> {
             toolService.mousePressed(gc, e);
