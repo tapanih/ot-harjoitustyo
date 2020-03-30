@@ -2,15 +2,18 @@ package pixeleditor.ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -34,14 +37,20 @@ import pixeleditor.domain.Tool;
 import pixeleditor.domain.ToolService;
 
 public class PixelEditorUi extends Application {
-    
+
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;
+    public static final double DEFAULT_CANVAS_WIDTH = 400;
+    public static final double DEFAULT_CANVAS_HEIGHT = 300;
     private ToolService toolService;
+    private Canvas canvas;
+    private GraphicsContext gc;
 
     @Override
     public void init() throws Exception {
         this.toolService = new ToolService();
+        this.canvas = new Canvas(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
+        this.gc = canvas.getGraphicsContext2D();
     }
 
     @Override
@@ -53,8 +62,10 @@ public class PixelEditorUi extends Application {
         final MenuBar menuBar = new MenuBar();
         final Menu fileMenu = new Menu("File");
 
+        final MenuItem newMenuItem = new MenuItem("New");
         final MenuItem exportMenuItem = new MenuItem("Export to PNG...");
-        final MenuItem exitMenuItem = new MenuItem("Exit");  
+        final MenuItem exitMenuItem = new MenuItem("Exit");
+        fileMenu.getItems().add(newMenuItem);
         fileMenu.getItems().add(exportMenuItem);
         fileMenu.getItems().add(exitMenuItem);
         menuBar.getMenus().add(fileMenu);
@@ -88,18 +99,23 @@ public class PixelEditorUi extends Application {
 
         final StackPane canvasHolder = new StackPane();
         canvasHolder.setStyle("-fx-background-color: white");
-        final Canvas canvas = new Canvas(400, 300);
-
         canvasHolder.getChildren().add(canvas);
-
         canvasHolder.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        final GraphicsContext gc = canvas.getGraphicsContext2D();
 
         borderPane.setTop(hBox);
         borderPane.setLeft(vBox);
         borderPane.setCenter(canvasHolder);
-        
-                
+
+        newMenuItem.setOnAction(e -> {
+            Dialog<Dimension2D> dialog = new NewImageDialog(primaryStage);
+            Optional<Dimension2D> result = dialog.showAndWait();
+            if (result.isPresent()) {
+                canvas.setHeight(result.get().getHeight());
+                canvas.setWidth(result.get().getWidth());
+                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            }
+        });
+
         exportMenuItem.setOnAction(e -> {
             SnapshotParameters params = new SnapshotParameters();
             params.setFill(Color.TRANSPARENT);
@@ -109,7 +125,6 @@ public class PixelEditorUi extends Application {
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
             fileChooser.getExtensionFilters().add(extFilter);
 
-            //Show save file dialog
             File file = fileChooser.showSaveDialog(primaryStage);
 
             try {
