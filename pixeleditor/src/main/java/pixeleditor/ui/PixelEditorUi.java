@@ -35,8 +35,8 @@ import pixeleditor.domain.ToolService;
 
 public class PixelEditorUi extends Application {
     
-    public final int WINDOW_WIDTH = 800;
-    public final int WINDOW_HEIGHT = 600;
+    public static final int WINDOW_WIDTH = 800;
+    public static final int WINDOW_HEIGHT = 600;
     private ToolService toolService;
 
     @Override
@@ -66,16 +66,17 @@ public class PixelEditorUi extends Application {
         final ToggleButton penButton = new ToggleButton("P");
         final ToggleButton eraserButton = new ToggleButton("E");
         // An ugly way to connect buttons to tools
-        penButton.setUserData(toolService.PEN_TOOL);
-        eraserButton.setUserData(toolService.ERASER_TOOL);
+        penButton.setUserData(ToolService.PEN_TOOL);
+        eraserButton.setUserData(ToolService.ERASER_TOOL);
 
         toolBar.getItems().add(penButton);
         toolBar.getItems().add(eraserButton);
 
         final ToggleGroup toolGroup = new ToggleGroup();
         toolGroup.selectedToggleProperty().addListener((ov, toggle, newToggle) -> {
-            if (newToggle != null)
+            if (newToggle != null) {
                 toolService.setCurrentTool((Tool) toolGroup.getSelectedToggle().getUserData());
+            }
         });
         penButton.setToggleGroup(toolGroup);
         eraserButton.setToggleGroup(toolGroup);
@@ -112,7 +113,7 @@ public class PixelEditorUi extends Application {
             File file = fileChooser.showSaveDialog(primaryStage);
 
             try {
-                if(file != null) {
+                if (file != null) {
                     ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
                 }
             } catch (IOException ex) {

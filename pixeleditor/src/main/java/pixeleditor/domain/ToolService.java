@@ -11,8 +11,8 @@ import pixeleditor.domain.tools.PenTool;
  */     
 public class ToolService {  
 
-    public final PenTool PEN_TOOL = new PenTool();
-    public final EraserTool ERASER_TOOL = new EraserTool();
+    public static final PenTool PEN_TOOL = new PenTool();
+    public static final EraserTool ERASER_TOOL = new EraserTool();
 
     private Tool currentTool;
     
@@ -25,14 +25,20 @@ public class ToolService {
     } 
 
     public void mousePressed(GraphicsContext gc, MouseEvent e) {
-        if (currentTool != null) currentTool.mousePressed(gc, e);
+        if (currentTool != null) {
+            currentTool.mousePressed(gc, e);
+        }
     }
 
     public void mouseDragged(GraphicsContext gc, MouseEvent e) {
-        if (currentTool != null) currentTool.mouseDragged(gc, e);
+        if (currentTool != null) {
+            currentTool.mouseDragged(gc, e);
+        }
     }
 
     public void mouseReleased(GraphicsContext gc, MouseEvent e) {
-        if (currentTool != null) currentTool.mouseReleased(gc, e);
+        if (currentTool != null) {
+            currentTool.mouseReleased(gc, e);
+        }
     }
 }
