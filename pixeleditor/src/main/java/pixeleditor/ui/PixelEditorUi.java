@@ -20,6 +20,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -63,11 +64,10 @@ public class PixelEditorUi extends Application {
         final Menu fileMenu = new Menu("File");
 
         final MenuItem newMenuItem = new MenuItem("New");
+        final MenuItem importMenuItem = new MenuItem("Import from PNG...");
         final MenuItem exportMenuItem = new MenuItem("Export to PNG...");
         final MenuItem exitMenuItem = new MenuItem("Exit");
-        fileMenu.getItems().add(newMenuItem);
-        fileMenu.getItems().add(exportMenuItem);
-        fileMenu.getItems().add(exitMenuItem);
+        fileMenu.getItems().addAll(newMenuItem, importMenuItem, exportMenuItem, exitMenuItem);
         menuBar.getMenus().add(fileMenu);
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 
@@ -113,6 +113,26 @@ public class PixelEditorUi extends Application {
                 canvas.setHeight(result.get().getHeight());
                 canvas.setWidth(result.get().getWidth());
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            }
+        });
+        
+        importMenuItem.setOnAction(e -> {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+            fileChooser.getExtensionFilters().add(extFilter);
+            
+            File file = fileChooser.showOpenDialog(primaryStage);
+            
+            try {
+                if (file != null) {
+                    Image image = new Image(file.toURI().toString());
+                    canvas.setHeight(image.getHeight());
+                    canvas.setWidth(image.getWidth());
+                    gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                    gc.drawImage(image, 0, 0);
+                }
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
             }
         });
 
