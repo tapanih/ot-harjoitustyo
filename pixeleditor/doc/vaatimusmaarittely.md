@@ -7,13 +7,13 @@ Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia 
 ### Suunnitellut toiminnallisuudet
 
 - Työkalut:
-    - kynä
-    - pyyhekumi
+    - kynä (tehty)
+    - pyyhekumi (tehty)
     - värin valinta
-- Työkalujen valinta painamalla sivupalkissa olevia nappeja
-- Uuden kuvan luominen ja sen koon valinta
-- Kuvan tallennus PNG-kuvaformaattiin
-- Kuvan tuominen sovellukseen PNG-kuvaformaatista
+- Työkalujen valinta painamalla sivupalkissa olevia nappeja (tehty)
+- Uuden kuvan luominen ja sen koon valinta (tehty)
+- Kuvan tallennus PNG-kuvaformaattiin (tehty)
+- Kuvan tuominen sovellukseen PNG-kuvaformaatista (tehty)
 
 ### Jatkokehitysideoita
 
