@@ -4,6 +4,8 @@
 
 [Vaatimusmäärittely](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/vaatimusmaarittely.md)
 
+[Arkkitehtuurikuvaus](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/arkkitehtuuri.md)
+
 [Tuntikirjanpito](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/tuntikirjanpito.md)
 
 ## Komentorivitoiminnot
@@ -33,4 +35,12 @@ mvn jacoco:report
 
 ja raportti löytyy tämän jälkeen tiedostosta *target/site/jacoco/index.html*
 
+### Checkstyle ###
 
+Tiedostossa [checkstyle.xml](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/checkstyle.xml) määritellyt tarkistukset suoritetaan komennolla
+
+```
+mvn jxr:jxr checkstyle:checkstyle
+```
+
+ja mahdolliset virheilmoitukset löytyvät tämän jälkeen tiedostosta *target/site/checkstyle.html*
