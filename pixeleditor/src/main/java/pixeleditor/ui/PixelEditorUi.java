@@ -52,6 +52,7 @@ public class PixelEditorUi extends Application {
         this.toolService = new ToolService();
         this.canvas = new Canvas(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
+        gc.setImageSmoothing(false);
     }
 
     @Override
@@ -115,14 +116,14 @@ public class PixelEditorUi extends Application {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             }
         });
-        
+
         importMenuItem.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
             fileChooser.getExtensionFilters().add(extFilter);
-            
+
             File file = fileChooser.showOpenDialog(primaryStage);
-            
+
             try {
                 if (file != null) {
                     Image image = new Image(file.toURI().toString());
