@@ -5,6 +5,7 @@ import de.saxsys.javafx.test.TestInJfxThread;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.image.PixelReader;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import pixeleditor.domain.ColorService;
 
 
 @RunWith(JfxRunner.class)
@@ -28,6 +30,8 @@ public class PenToolTest {
     @BeforeClass
     public static void setUpClass() {
         pen = new PenTool();
+        ColorService.setColorPicker(new ColorPicker());
+        ColorService.setCurrentColor(Color.BLACK);
     }
     
     @Before
