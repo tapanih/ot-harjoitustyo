@@ -22,7 +22,7 @@ public class ToolService {
 
     public Tool getCurrentTool() {
         return currentTool;
-    } 
+    }
 
     public void mousePressed(GraphicsContext gc, MouseEvent e) {
         if (currentTool != null) {

@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -77,12 +78,13 @@ public class PixelEditorUi extends Application {
 
         final ToggleButton penButton = new ToggleButton("P");
         final ToggleButton eraserButton = new ToggleButton("E");
+        final ColorPicker colorPicker = new ColorChooser();
+
         // An ugly way to connect buttons to tools
         penButton.setUserData(ToolService.PEN_TOOL);
         eraserButton.setUserData(ToolService.ERASER_TOOL);
 
-        toolBar.getItems().add(penButton);
-        toolBar.getItems().add(eraserButton);
+        toolBar.getItems().addAll(penButton, eraserButton, colorPicker);
 
         final ToggleGroup toolGroup = new ToggleGroup();
         toolGroup.selectedToggleProperty().addListener((ov, toggle, newToggle) -> {

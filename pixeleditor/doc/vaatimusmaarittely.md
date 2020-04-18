@@ -9,7 +9,7 @@ Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia 
 - Työkalut:
     - kynä (tehty)
     - pyyhekumi (tehty)
-    - värin valinta
+    - värin valinta (tehty)
 - Työkalujen valinta painamalla sivupalkissa olevia nappeja (tehty)
 - Uuden kuvan luominen ja sen koon valinta (tehty)
 - Kuvan tallennus PNG-kuvaformaattiin (tehty)
