@@ -75,10 +75,12 @@ public class PixelEditorUi extends Application {
 
         final ToolBar toolBar = new ToolBar();
         toolBar.setOrientation(Orientation.VERTICAL);
+        toolBar.setPadding(new Insets(4, 0, 4, 4));
 
-        final ToggleButton penButton = new ToggleButton("P");
-        final ToggleButton eraserButton = new ToggleButton("E");
-        final ToggleButton colorPickerButton = new ToggleButton("C");
+        final ToggleButton penButton = new ToolButton("pen.png");
+        final ToggleButton eraserButton = new ToolButton("eraser.png");
+        final ToggleButton colorPickerButton = new ToolButton("colorpicker.png");
+        final ToggleButton bucketToolButton = new ToolButton("bucketfill.png");
         final ColorPicker colorChooser = new ColorChooser();
 
         // An ugly way to connect buttons to tools
@@ -86,7 +88,7 @@ public class PixelEditorUi extends Application {
         eraserButton.setUserData(ToolService.ERASER_TOOL);
         colorPickerButton.setUserData(ToolService.COLOR_PICKER_TOOL);
 
-        toolBar.getItems().addAll(penButton, eraserButton, colorPickerButton, colorChooser);
+        toolBar.getItems().addAll(penButton, eraserButton, colorPickerButton, bucketToolButton, colorChooser);
 
         final ToggleGroup toolGroup = new ToggleGroup();
         toolGroup.selectedToggleProperty().addListener((ov, toggle, newToggle) -> {
@@ -97,6 +99,7 @@ public class PixelEditorUi extends Application {
         penButton.setToggleGroup(toolGroup);
         eraserButton.setToggleGroup(toolGroup);
         colorPickerButton.setToggleGroup(toolGroup);
+        bucketToolButton.setToggleGroup(toolGroup);
 
         toolBar.prefHeightProperty().bind(primaryStage.heightProperty());
 
