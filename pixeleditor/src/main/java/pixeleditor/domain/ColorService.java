@@ -4,7 +4,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
 
 public class ColorService {
-    private static Color currentColor;
+    private static Color currentColor = Color.WHITE;
     private static ColorPicker colorPicker;
 
     public static void setColorPicker(ColorPicker picker) {
