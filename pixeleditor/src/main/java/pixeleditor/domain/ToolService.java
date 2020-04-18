@@ -2,6 +2,7 @@ package pixeleditor.domain;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
+import pixeleditor.domain.tools.BucketFillTool;
 import pixeleditor.domain.tools.ColorPickerTool;
 import pixeleditor.domain.tools.EraserTool;
 import pixeleditor.domain.tools.PenTool;
@@ -15,6 +16,7 @@ public class ToolService {
     public static final PenTool PEN_TOOL = new PenTool();
     public static final EraserTool ERASER_TOOL = new EraserTool();
     public static final ColorPickerTool COLOR_PICKER_TOOL = new ColorPickerTool();
+    public static final BucketFillTool BUCKET_FILL_TOOL = new BucketFillTool();
 
     private Tool currentTool;
     

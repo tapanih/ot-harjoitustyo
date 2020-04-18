@@ -87,6 +87,7 @@ public class PixelEditorUi extends Application {
         penButton.setUserData(ToolService.PEN_TOOL);
         eraserButton.setUserData(ToolService.ERASER_TOOL);
         colorPickerButton.setUserData(ToolService.COLOR_PICKER_TOOL);
+        bucketToolButton.setUserData(ToolService.BUCKET_FILL_TOOL);
 
         toolBar.getItems().addAll(penButton, eraserButton, colorPickerButton, bucketToolButton, colorChooser);
 
