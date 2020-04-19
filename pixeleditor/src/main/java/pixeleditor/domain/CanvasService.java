@@ -9,6 +9,10 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
+/**
+ * A static utility class that provides limited access to the canvas
+ * through various utility methods.
+ */
 public class CanvasService {
     private static Canvas canvas;
     private static GraphicsContext gc;
