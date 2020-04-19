@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import pixeleditor.domain.CanvasService;
 import pixeleditor.domain.ColorService;
+import pixeleditor.domain.utils.TestUtils;
 
 
 @RunWith(JfxRunner.class)
@@ -39,9 +40,7 @@ public class PenToolTest {
     @Test
     @TestInJfxThread
     public void mousePressDrawsASinglePixel() {
-        MouseEvent e = new MouseEvent(MOUSE_PRESSED, 20.0, 10.0, 0, 0, 
-                MouseButton.PRIMARY, 1, false, false, false, false, 
-                true, false, false, false, false, false, null);
+        MouseEvent e = TestUtils.createMouseEvent(MOUSE_PRESSED, 20.0, 10.0);
         
         pen.mousePressed(e);
         PixelReader pixelReader = CanvasService.getPixelReader(Color.TRANSPARENT);
@@ -63,18 +62,10 @@ public class PenToolTest {
     @Test
     @TestInJfxThread
     public void mouseDragDrawsALine() {
-        MouseEvent e1 = new MouseEvent(MOUSE_DRAGGED, 20.0, 10.0, 0, 0,
-                MouseButton.PRIMARY, 1, false, false, false, false,
-                true, false, false, false, false, false, null);
-        MouseEvent e2 = new MouseEvent(MOUSE_DRAGGED, 23.0, 10.0, 0, 0,
-                MouseButton.PRIMARY, 1, false, false, false, false,
-                true, false, false, false, false, false, null);
-        MouseEvent e3 = new MouseEvent(MOUSE_DRAGGED, 27.0, 10.0, 0, 0,
-                MouseButton.PRIMARY, 1, false, false, false, false,
-                true, false, false, false, false, false, null);
-        MouseEvent e4 = new MouseEvent(MOUSE_RELEASED, 27.0, 10.0, 0, 0,
-                MouseButton.PRIMARY, 1, false, false, false, false,
-                true, false, false, false, false, false, null);
+        MouseEvent e1 = TestUtils.createMouseEvent(MOUSE_DRAGGED, 20.0, 10.0);
+        MouseEvent e2 = TestUtils.createMouseEvent(MOUSE_DRAGGED, 23.0, 10.0);
+        MouseEvent e3 = TestUtils.createMouseEvent(MOUSE_DRAGGED, 27.0, 10.0);
+        MouseEvent e4 = TestUtils.createMouseEvent(MOUSE_RELEASED, 27.0, 10.0);
 
         pen.mouseDragged(e1);
         pen.mouseDragged(e2);

@@ -13,6 +13,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import pixeleditor.domain.CanvasService;
+import pixeleditor.domain.utils.TestUtils;
 
 @RunWith(JfxRunner.class)
 public class EraserToolTest {
@@ -32,9 +33,7 @@ public class EraserToolTest {
     @Test
     @TestInJfxThread
     public void mousePressRemovesASinglePixel() {
-        MouseEvent e = new MouseEvent(MOUSE_PRESSED, 20.0, 10.0, 0, 0, 
-                MouseButton.PRIMARY, 1, false, false, false, false, 
-                true, false, false, false, false, false, null);
+        MouseEvent e = TestUtils.createMouseEvent(MOUSE_PRESSED, 20.0, 10.0);
         
         CanvasService.fill(Color.CYAN);
         eraser.mousePressed(e);
