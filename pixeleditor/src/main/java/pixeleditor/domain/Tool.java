@@ -5,6 +5,24 @@ import javafx.scene.input.MouseEvent;
 
 
 public abstract class Tool {
+
+    private final String iconFileName;
+
+    /**
+     * A constructor for all subclasses.
+     * @param iconFileName name of the image file located in resources/images that's to be used as an icon
+     */
+    protected Tool(String iconFileName) {
+        this.iconFileName = iconFileName;
+    }
+
+    /**
+     * Returns the filename of the icon.
+     * @return name of the image file located in resources/images that is used as an icon for this tool
+     */
+    public String getIconFileName() {
+        return this.iconFileName;
+    }
     
     /**
      * An abstract method for updating the canvas when mouse is clicked on it.

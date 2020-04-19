@@ -77,17 +77,11 @@ public class PixelEditorUi extends Application {
         toolBar.setOrientation(Orientation.VERTICAL);
         toolBar.setPadding(new Insets(4, 0, 4, 4));
 
-        final ToggleButton penButton = new ToolButton("pen.png");
-        final ToggleButton eraserButton = new ToolButton("eraser.png");
-        final ToggleButton colorPickerButton = new ToolButton("colorpicker.png");
-        final ToggleButton bucketToolButton = new ToolButton("bucketfill.png");
+        final ToggleButton penButton = new ToolButton(ToolService.PEN_TOOL);
+        final ToggleButton eraserButton = new ToolButton(ToolService.ERASER_TOOL);
+        final ToggleButton colorPickerButton = new ToolButton(ToolService.COLOR_PICKER_TOOL);
+        final ToggleButton bucketToolButton = new ToolButton(ToolService.BUCKET_FILL_TOOL);
         final ColorPicker colorChooser = new ColorChooser();
-
-        // An ugly way to connect buttons to tools
-        penButton.setUserData(ToolService.PEN_TOOL);
-        eraserButton.setUserData(ToolService.ERASER_TOOL);
-        colorPickerButton.setUserData(ToolService.COLOR_PICKER_TOOL);
-        bucketToolButton.setUserData(ToolService.BUCKET_FILL_TOOL);
 
         toolBar.getItems().addAll(penButton, eraserButton, colorPickerButton, bucketToolButton, colorChooser);
 

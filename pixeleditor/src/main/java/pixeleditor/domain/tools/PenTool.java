@@ -12,7 +12,22 @@ import pixeleditor.domain.Tool;
  */
 public class PenTool extends Tool {
     protected Point2D prevMouseLocation = null;
-    
+
+    /**
+     * A default constructor for PenTool.
+     */
+    public PenTool() {
+        super("pen.png");
+    }
+
+    /**
+     * A constructor for subclasses that acts as a pass-through to the superclass constructor.
+     * @param iconFileName name of the image file located in resources/images that's to be used as an icon
+     */
+    protected PenTool(String iconFileName) {
+        super(iconFileName);
+    }
+
     /**
      * Draws a line using Bresenham's line algorithm.
      * Source: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm

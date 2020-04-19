@@ -14,6 +14,13 @@ import pixeleditor.domain.Tool;
 
 public class BucketFillTool extends Tool {
 
+    /**
+     * A default constructor for BucketFillTool.
+     */
+    public BucketFillTool() {
+        super("bucketfill.png");
+    }
+
     @Override
     public void mousePressed(GraphicsContext gc, MouseEvent e) {
     }

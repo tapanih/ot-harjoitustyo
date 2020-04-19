@@ -10,6 +10,13 @@ import pixeleditor.domain.Tool;
 
 public class ColorPickerTool extends Tool {
 
+    /**
+     * A default constructor for ColorPickerTool.
+     */
+    public ColorPickerTool() {
+        super("colorpicker.png");
+    }
+
     @Override
     public void mousePressed(GraphicsContext gc, MouseEvent e) {
         pickColor(gc, e);

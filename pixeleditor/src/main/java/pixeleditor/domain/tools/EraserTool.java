@@ -10,6 +10,13 @@ import javafx.scene.paint.Color;
  */
 public class EraserTool extends PenTool {
 
+    /**
+     * A default constructor for EraserTool.
+     */
+    public EraserTool() {
+        super("eraser.png");
+    }
+
     @Override
     public void mousePressed(GraphicsContext gc, MouseEvent e) {
         gc.getPixelWriter().setColor((int) e.getX(), (int) e.getY(), Color.TRANSPARENT);
