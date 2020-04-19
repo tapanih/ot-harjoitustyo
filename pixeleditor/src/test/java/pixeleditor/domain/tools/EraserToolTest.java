@@ -2,9 +2,6 @@ package pixeleditor.domain.tools;
 
 import de.saxsys.javafx.test.JfxRunner;
 import de.saxsys.javafx.test.TestInJfxThread;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelReader;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -15,12 +12,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import pixeleditor.domain.CanvasService;
 
 @RunWith(JfxRunner.class)
 public class EraserToolTest {
     private static EraserTool eraser;
-    private static Canvas canvas;
-    private static GraphicsContext gc;
 
     @BeforeClass
     public static void setUpClass() {
@@ -29,8 +25,8 @@ public class EraserToolTest {
     
     @Before
     public void setUp() {
-        canvas = new Canvas(100, 100);
-        gc = canvas.getGraphicsContext2D();
+        CanvasService.init();
+        CanvasService.clearAndResize(100, 100);
     }
     
     @Test
@@ -40,12 +36,9 @@ public class EraserToolTest {
                 MouseButton.PRIMARY, 1, false, false, false, false, 
                 true, false, false, false, false, false, null);
         
-        gc.setFill(Color.CYAN);
-        gc.fillRect(0, 0, 100, 100);
-        eraser.mousePressed(gc, e);
-        SnapshotParameters params = new SnapshotParameters();
-        params.setFill(Color.TRANSPARENT);
-        PixelReader pixelReader = canvas.snapshot(params, null).getPixelReader();
+        CanvasService.fill(Color.CYAN);
+        eraser.mousePressed(e);
+        PixelReader pixelReader = CanvasService.getPixelReader(Color.TRANSPARENT);
         
         // Selected pixel is transparent
         assertEquals(Color.TRANSPARENT, pixelReader.getColor(20, 10));

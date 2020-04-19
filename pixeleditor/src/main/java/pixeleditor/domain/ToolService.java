@@ -30,34 +30,31 @@ public class ToolService {
 
     /**
      * Forwards a mouse press event to the currently selected tool.
-     * @param gc GraphicsContext for updating the canvas
      * @param e  MouseEvent that was triggered on the canvas
      */
-    public void mousePressed(GraphicsContext gc, MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
         if (currentTool != null) {
-            currentTool.mousePressed(gc, e);
+            currentTool.mousePressed(e);
         }
     }
 
     /**
      * Forwards a mouse drag event to the currently selected tool.
-     * @param gc GraphicsContext for updating the canvas
      * @param e  MouseEvent that was triggered on the canvas
      */
-    public void mouseDragged(GraphicsContext gc, MouseEvent e) {
+    public void mouseDragged(MouseEvent e) {
         if (currentTool != null) {
-            currentTool.mouseDragged(gc, e);
+            currentTool.mouseDragged(e);
         }
     }
 
     /**
      * Forwards a mouse release event to the currently selected tool.
-     * @param gc GraphicsContext for updating the canvas
      * @param e  MouseEvent that was triggered on the canvas
      */
-    public void mouseReleased(GraphicsContext gc, MouseEvent e) {
+    public void mouseReleased(MouseEvent e) {
         if (currentTool != null) {
-            currentTool.mouseReleased(gc, e);
+            currentTool.mouseReleased(e);
         }
     }
 }

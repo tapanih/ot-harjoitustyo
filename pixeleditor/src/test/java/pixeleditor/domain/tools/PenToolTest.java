@@ -2,9 +2,6 @@ package pixeleditor.domain.tools;
 
 import de.saxsys.javafx.test.JfxRunner;
 import de.saxsys.javafx.test.TestInJfxThread;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.image.PixelReader;
 import javafx.scene.input.MouseButton;
@@ -18,14 +15,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import pixeleditor.domain.CanvasService;
 import pixeleditor.domain.ColorService;
 
 
 @RunWith(JfxRunner.class)
 public class PenToolTest {
     private static PenTool pen;
-    private static Canvas canvas;
-    private static GraphicsContext gc;
     
     @BeforeClass
     public static void setUpClass() {
@@ -36,8 +32,8 @@ public class PenToolTest {
     
     @Before
     public void setUp() {
-        canvas = new Canvas(50, 50);
-        gc = canvas.getGraphicsContext2D();
+        CanvasService.init();
+        CanvasService.clearAndResize(50, 50);
     }
     
     @Test
@@ -47,10 +43,8 @@ public class PenToolTest {
                 MouseButton.PRIMARY, 1, false, false, false, false, 
                 true, false, false, false, false, false, null);
         
-        pen.mousePressed(gc, e);
-        SnapshotParameters params = new SnapshotParameters();
-        params.setFill(Color.TRANSPARENT);
-        PixelReader pixelReader = canvas.snapshot(params, null).getPixelReader();
+        pen.mousePressed(e);
+        PixelReader pixelReader = CanvasService.getPixelReader(Color.TRANSPARENT);
         
         // Selected pixel is colored
         assertEquals(Color.BLACK, pixelReader.getColor(20, 10));
@@ -82,14 +76,12 @@ public class PenToolTest {
                 MouseButton.PRIMARY, 1, false, false, false, false,
                 true, false, false, false, false, false, null);
 
-        pen.mouseDragged(gc, e1);
-        pen.mouseDragged(gc, e2);
-        pen.mouseDragged(gc, e3);
-        pen.mouseReleased(gc, e4);
+        pen.mouseDragged(e1);
+        pen.mouseDragged(e2);
+        pen.mouseDragged(e3);
+        pen.mouseReleased(e4);
 
-        SnapshotParameters params = new SnapshotParameters();
-        params.setFill(Color.TRANSPARENT);
-        PixelReader pixelReader = canvas.snapshot(params, null).getPixelReader();
+        PixelReader pixelReader = CanvasService.getPixelReader(Color.TRANSPARENT);;
 
         assertEquals(Color.BLACK, pixelReader.getColor(20, 10));
         assertEquals(Color.BLACK, pixelReader.getColor(21, 10));

@@ -35,6 +35,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import pixeleditor.domain.CanvasService;
 import pixeleditor.domain.Tool;
 import pixeleditor.domain.ToolService;
 
@@ -42,18 +43,12 @@ public class PixelEditorUi extends Application {
 
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;
-    public static final double DEFAULT_CANVAS_WIDTH = 400;
-    public static final double DEFAULT_CANVAS_HEIGHT = 300;
     private ToolService toolService;
-    private Canvas canvas;
-    private GraphicsContext gc;
 
     @Override
     public void init() throws Exception {
         this.toolService = new ToolService();
-        this.canvas = new Canvas(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
-        this.gc = canvas.getGraphicsContext2D();
-        gc.setImageSmoothing(false);
+        CanvasService.init();
     }
 
     @Override
@@ -103,7 +98,7 @@ public class PixelEditorUi extends Application {
 
         final StackPane canvasHolder = new StackPane();
         canvasHolder.setStyle("-fx-background-color: white");
-        canvasHolder.getChildren().add(canvas);
+        canvasHolder.getChildren().add(CanvasService.getCanvas());
         canvasHolder.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         borderPane.setTop(hBox);
@@ -114,9 +109,7 @@ public class PixelEditorUi extends Application {
             Dialog<Dimension2D> dialog = new NewImageDialog(primaryStage);
             Optional<Dimension2D> result = dialog.showAndWait();
             if (result.isPresent()) {
-                canvas.setHeight(result.get().getHeight());
-                canvas.setWidth(result.get().getWidth());
-                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                CanvasService.clearAndResize(result.get().getWidth(), result.get().getHeight());
             }
         });
 
@@ -130,10 +123,7 @@ public class PixelEditorUi extends Application {
             try {
                 if (file != null) {
                     Image image = new Image(file.toURI().toString());
-                    canvas.setHeight(image.getHeight());
-                    canvas.setWidth(image.getWidth());
-                    gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                    gc.drawImage(image, 0, 0);
+                    CanvasService.drawImageAndResize(image);
                 }
             } catch (Exception ex) {
                 System.out.println(ex.toString());
@@ -143,7 +133,7 @@ public class PixelEditorUi extends Application {
         exportMenuItem.setOnAction(e -> {
             SnapshotParameters params = new SnapshotParameters();
             params.setFill(Color.TRANSPARENT);
-            WritableImage image = canvas.snapshot(params, null);
+            WritableImage image = CanvasService.getCanvas().snapshot(params, null);
 
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
@@ -164,16 +154,16 @@ public class PixelEditorUi extends Application {
             Platform.exit();
         });
 
-        canvas.setOnMouseClicked(e -> {
-            toolService.mousePressed(gc, e);
+        CanvasService.getCanvas().setOnMouseClicked(e -> {
+            toolService.mousePressed(e);
         });
 
-        canvas.setOnMouseDragged(e -> {
-            toolService.mouseDragged(gc, e);
+        CanvasService.getCanvas().setOnMouseDragged(e -> {
+            toolService.mouseDragged(e);
         });
 
-        canvas.setOnMouseReleased(e -> {
-            toolService.mouseReleased(gc, e);
+        CanvasService.getCanvas().setOnMouseReleased(e -> {
+            toolService.mouseReleased(e);
         });
 
         final Scene scene = new Scene(borderPane, WINDOW_WIDTH, WINDOW_HEIGHT);

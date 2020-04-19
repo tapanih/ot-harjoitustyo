@@ -1,9 +1,9 @@
 package pixeleditor.domain.tools;
 
 import javafx.geometry.Point2D;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import pixeleditor.domain.CanvasService;
 import pixeleditor.domain.ColorService;
 import pixeleditor.domain.Tool;
 
@@ -31,20 +31,19 @@ public class PenTool extends Tool {
     /**
      * Draws a line using Bresenham's line algorithm.
      * Source: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
-     * @param gc    GraphicsContext for updating the canvas
      * @param x0    x-coordinate of the start of the line
      * @param y0    y-coordinate of the start of the line
      * @param x1    x-coordinate of the end of the line
      * @param y1    y-coordinate of the end of the line
      * @param color color of the drawn line
      */
-    protected void drawLine(GraphicsContext gc, int x0, int y0, int x1, int y1, Color color) {
+    protected void drawLine(int x0, int y0, int x1, int y1, Color color) {
         int dx = Math.abs(x1 - x0),  sx = x0 < x1 ? 1 : -1;
         int dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
         int err = dx + dy;
         
         while (true) {
-            gc.getPixelWriter().setColor(x0, y0, color);
+            CanvasService.getPixelWriter().setColor(x0, y0, color);
             if (x0 == x1 && y0 == y1) {
                 break;
             }
@@ -61,21 +60,21 @@ public class PenTool extends Tool {
     }
 
     @Override
-    public void mousePressed(GraphicsContext gc, MouseEvent e) {
-        gc.getPixelWriter().setColor((int) e.getX(), (int) e.getY(), ColorService.getCurrentColor());
+    public void mousePressed(MouseEvent e) {
+        CanvasService.getPixelWriter().setColor((int) e.getX(), (int) e.getY(), ColorService.getCurrentColor());
     }
 
     @Override
-    public void mouseDragged(GraphicsContext gc, MouseEvent e) {
+    public void mouseDragged(MouseEvent e) {
         if (prevMouseLocation != null) {
-            drawLine(gc, (int) prevMouseLocation.getX(), (int) prevMouseLocation.getY(),
+            drawLine((int) prevMouseLocation.getX(), (int) prevMouseLocation.getY(),
                     (int) e.getX(), (int) e.getY(), ColorService.getCurrentColor());
         }
         prevMouseLocation = new Point2D(e.getX(), e.getY());
     }
 
     @Override
-    public void mouseReleased(GraphicsContext gc, MouseEvent e) {
+    public void mouseReleased(MouseEvent e) {
         prevMouseLocation = null;
     }
 }
