@@ -4,7 +4,6 @@ import de.saxsys.javafx.test.JfxRunner;
 import de.saxsys.javafx.test.TestInJfxThread;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.image.PixelReader;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import static javafx.scene.input.MouseEvent.MOUSE_DRAGGED;
 import static javafx.scene.input.MouseEvent.MOUSE_PRESSED;

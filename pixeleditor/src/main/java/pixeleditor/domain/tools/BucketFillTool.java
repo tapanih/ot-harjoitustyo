@@ -2,7 +2,6 @@ package pixeleditor.domain.tools;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.input.MouseEvent;

@@ -3,7 +3,6 @@ package pixeleditor.domain.tools;
 import de.saxsys.javafx.test.JfxRunner;
 import de.saxsys.javafx.test.TestInJfxThread;
 import javafx.scene.image.PixelReader;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import static javafx.scene.input.MouseEvent.MOUSE_PRESSED;
 import javafx.scene.paint.Color;

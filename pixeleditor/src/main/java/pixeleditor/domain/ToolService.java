@@ -1,6 +1,5 @@
 package pixeleditor.domain;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import pixeleditor.domain.tools.BucketFillTool;
 import pixeleditor.domain.tools.ColorPickerTool;
