@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 public class CanvasService {
@@ -56,5 +57,11 @@ public class CanvasService {
     public static void fill(Color color) {
         GC.setFill(color);
         GC.fillRect(0, 0, CANVAS.getWidth(), CANVAS.getHeight());
+    }
+
+    public static WritableImage getCanvasAsImage() {
+        SnapshotParameters params = new SnapshotParameters();
+        params.setFill(Color.TRANSPARENT);
+        return CANVAS.snapshot(params, null);
     }
 }

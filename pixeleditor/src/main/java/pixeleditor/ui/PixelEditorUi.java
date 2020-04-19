@@ -1,16 +1,12 @@
 package pixeleditor.ui;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
@@ -19,8 +15,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
-import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -30,10 +24,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 import pixeleditor.domain.CanvasService;
+import pixeleditor.domain.FileService;
 import pixeleditor.domain.Tool;
 import pixeleditor.domain.ToolService;
 
@@ -42,10 +35,12 @@ public class PixelEditorUi extends Application {
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;
     private ToolService toolService;
+    private FileService fileService;
 
     @Override
     public void init() throws Exception {
         this.toolService = new ToolService();
+        this.fileService = new FileService();
         CanvasService.init();
     }
 
@@ -112,40 +107,11 @@ public class PixelEditorUi extends Application {
         });
 
         importMenuItem.setOnAction(e -> {
-            FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
-            fileChooser.getExtensionFilters().add(extFilter);
-
-            File file = fileChooser.showOpenDialog(primaryStage);
-
-            try {
-                if (file != null) {
-                    Image image = new Image(file.toURI().toString());
-                    CanvasService.drawImageAndResize(image);
-                }
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
-            }
+            fileService.importToPNG(primaryStage);
         });
 
         exportMenuItem.setOnAction(e -> {
-            SnapshotParameters params = new SnapshotParameters();
-            params.setFill(Color.TRANSPARENT);
-            WritableImage image = CanvasService.getCanvas().snapshot(params, null);
-
-            FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
-            fileChooser.getExtensionFilters().add(extFilter);
-
-            File file = fileChooser.showSaveDialog(primaryStage);
-
-            try {
-                if (file != null) {
-                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-                }
-            } catch (IOException ex) {
-                System.out.println(ex.toString());
-            }
+            fileService.exportFromPNG(primaryStage);
         });
 
         exitMenuItem.setOnAction(e -> {
