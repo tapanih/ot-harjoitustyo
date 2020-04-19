@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 
 public class NewImageDialog extends Dialog<Dimension2D> {
 
+    /**
+     * Defines a dialog for creating a new image.
+     * @param primaryStage the owner of this dialog
+     */
     public NewImageDialog(Stage primaryStage) {
         super();
         initOwner(primaryStage);

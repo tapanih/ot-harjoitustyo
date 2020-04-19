@@ -4,6 +4,11 @@ public class Point {
     private final int x;
     private final int y;
 
+    /**
+     * Creates a new point.
+     * @param x x-coordinate of the point
+     * @param y y-coordinate of the point
+    */
     public Point(int x, int y) {
         this.x = x;
         this.y = y;

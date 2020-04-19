@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
- * An eraser tool for removing individual pixels
+ * An eraser tool for removing individual pixels.
  */
 public class EraserTool extends PenTool {
 
