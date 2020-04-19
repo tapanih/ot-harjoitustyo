@@ -20,15 +20,15 @@ import pixeleditor.domain.utils.TestUtils;
 @RunWith(JfxRunner.class)
 public class ColorPickerToolTest {
     private static ColorPickerTool colorPicker;
-    
+
     @BeforeClass
     public static void setUpClass() {
         colorPicker = new ColorPickerTool();
     }
-    
+
     @Before
     public void setUp() {
-        CanvasService.setCanvas(new Canvas(20, 30));
+        CanvasService.setCanvas(new Canvas(10, 10));
         ColorService.setColorPicker(new ColorPicker());
         ColorService.setCurrentColor(Color.WHITE);
     }
@@ -36,8 +36,17 @@ public class ColorPickerToolTest {
     @Test
     @TestInJfxThread
     public void transparentColorIsInterpretedAsBlack() {
-        MouseEvent e = TestUtils.createMouseEvent(MOUSE_PRESSED, 10.0, 25.0);
+        MouseEvent e = TestUtils.createMouseEvent(MOUSE_PRESSED, 5.0, 5.0);
         colorPicker.mousePressed(e);
         assertEquals(Color.BLACK, ColorService.getCurrentColor());
+    }
+
+    @Test
+    @TestInJfxThread
+    public void colorWithTransparencyIsInterpretedAsOpaque() {
+        MouseEvent e = TestUtils.createMouseEvent(MOUSE_PRESSED, 5.0, 5.0);
+        CanvasService.fill(Color.rgb(255, 0, 0, 0.5)); // red with 50% opacity
+        colorPicker.mousePressed(e);
+        assertEquals(Color.RED, ColorService.getCurrentColor());
     }
 }

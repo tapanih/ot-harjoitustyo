@@ -34,9 +34,14 @@ public class ColorPickerTool extends Tool {
     }
 
     private void pickColor(MouseEvent e) {
-        PixelReader reader = CanvasService.getPixelReader(Color.BLACK);
+        PixelReader reader = CanvasService.getPixelReader(Color.TRANSPARENT);
         Color color = reader.getColor((int) e.getX(), (int) e.getY());
-        ColorService.setCurrentColor(color);
+        if (color.equals(Color.TRANSPARENT)) {
+            ColorService.setCurrentColor(Color.BLACK);
+        } else {
+            ColorService.setCurrentColor(Color.hsb(
+                color.getHue(), color.getSaturation(), color.getBrightness())
+            );
+        }
     }
-    
 }
