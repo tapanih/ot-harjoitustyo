@@ -61,7 +61,7 @@ public class BucketFillTool extends Tool {
             }
             if (x - 1 >= 0 && !checked[x - 1][y] && reader.getColor(x - 1, y).equals(target)) {
                 writer.setColor(x - 1, y, replacement);
-                checked[x + 1][y] = true;
+                checked[x - 1][y] = true;
                 stack.push(new Point(x - 1, y));
             }
             if (y + 1 < height && !checked[x][y + 1] && reader.getColor(x, y + 1).equals(target)) {
