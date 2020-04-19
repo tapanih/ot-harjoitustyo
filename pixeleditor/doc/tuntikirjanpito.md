@@ -8,4 +8,5 @@
 |29.3 |4h | Sovelluslogiikan eriyttämistä käyttöliittymästä ja testauksen aloittaminen |
 |30.3 |5h | Ominaisuuksien lisäämistä |
 |7.4  |6h | Paranneltu työkalujen toimintaa, lisätty testi ja päivitetty dokumentaatiota
-| Yht. | 17h | |
+|18.4 |8h | Lisätty työkalujen nappeihin kuvat. Toteutettu värin valinta, värin poiminta ja sankkotäyttö. Otettu Javadoc käyttöön.
+| Yht. | 31h | |

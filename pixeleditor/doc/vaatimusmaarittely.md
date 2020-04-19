@@ -19,6 +19,6 @@ Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia 
 
 Näitä toteutetaan, jos aikaa riittää.
 
-- Ämpäritäyttö
+- Ämpäritäyttö (tehty)
 - Historia (undo & redo)
 - Zoomaussäädin
