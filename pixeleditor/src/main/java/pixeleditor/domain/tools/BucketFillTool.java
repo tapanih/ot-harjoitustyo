@@ -11,6 +11,9 @@ import pixeleditor.domain.ColorService;
 import pixeleditor.domain.Point;
 import pixeleditor.domain.Tool;
 
+/**
+ * Flood fill.
+ */
 public class BucketFillTool extends Tool {
 
     /**

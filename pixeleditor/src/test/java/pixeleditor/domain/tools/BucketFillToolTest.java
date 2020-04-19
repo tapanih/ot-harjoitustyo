@@ -2,6 +2,7 @@ package pixeleditor.domain.tools;
 
 import de.saxsys.javafx.test.JfxRunner;
 import de.saxsys.javafx.test.TestInJfxThread;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.image.PixelReader;
 import javafx.scene.input.MouseEvent;
@@ -28,8 +29,7 @@ public class BucketFillToolTest {
     
     @Before
     public void setUp() {
-        CanvasService.init();
-        CanvasService.clearAndResize(4, 3);
+        CanvasService.setCanvas(new Canvas(4, 3));
         ColorService.setColorPicker(new ColorPicker());
     }
 

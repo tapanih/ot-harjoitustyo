@@ -10,26 +10,17 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 public class CanvasService {
-    public static final double DEFAULT_CANVAS_WIDTH = 400;
-    public static final double DEFAULT_CANVAS_HEIGHT = 300;
-    private static final Canvas CANVAS = new Canvas(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
-    private static final GraphicsContext GC = CANVAS.getGraphicsContext2D();
+    private static Canvas canvas;
+    private static GraphicsContext gc;
 
     /**
-     * Returns the canvas.
-     * Note: Using this method outside of UI should not be necessary.
-     *
-     * @return Canvas
+     * Sets the canvas and initializes it with correct settings.
+     * @param newCanvas new canvas
      */
-    public static Canvas getCanvas() {
-        return CANVAS;
-    }
-
-    /**
-     * Initializes canvas with correct settings.
-     */
-    public static void init() {
-        GC.setImageSmoothing(false);
+    public static void setCanvas(Canvas newCanvas) {
+        canvas = newCanvas;
+        gc = canvas.getGraphicsContext2D();
+        gc.setImageSmoothing(false);
     }
 
     /**
@@ -45,7 +36,7 @@ public class CanvasService {
     public static PixelReader getPixelReader(Color fillColor) {
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(fillColor);
-        return CANVAS.snapshot(params, null).getPixelReader();
+        return canvas.snapshot(params, null).getPixelReader();
     }
 
     /**
@@ -55,7 +46,7 @@ public class CanvasService {
      * @return PixelWriter for writing color values to individual pixels
      */
     public static PixelWriter getPixelWriter() {
-        return GC.getPixelWriter();
+        return gc.getPixelWriter();
     }
 
     /**
@@ -64,7 +55,7 @@ public class CanvasService {
      * @return height of the canvas
      */
     public static int getHeight() {
-        return (int) CANVAS.getHeight();
+        return (int) canvas.getHeight();
     }
 
     /**
@@ -73,7 +64,7 @@ public class CanvasService {
      * @return width of the canvas
      */
     public static int getWidth() {
-        return (int) CANVAS.getWidth();
+        return (int) canvas.getWidth();
     }
 
     /**
@@ -83,9 +74,9 @@ public class CanvasService {
      * @param height height of the new canvas
      */
     public static void clearAndResize(double width, double height) {
-        CANVAS.setHeight(height);
-        CANVAS.setWidth(width);
-        GC.clearRect(0, 0, width, height);
+        canvas.setHeight(height);
+        canvas.setWidth(width);
+        gc.clearRect(0, 0, width, height);
     }
 
     /**
@@ -95,10 +86,10 @@ public class CanvasService {
      * @param image image to draw on the canvas
      */
     public static void drawImageAndResize(Image image) {
-        CANVAS.setHeight(image.getHeight());
-        CANVAS.setWidth(image.getWidth());
-        GC.clearRect(0, 0, CANVAS.getWidth(), CANVAS.getHeight());
-        GC.drawImage(image, 0, 0);
+        canvas.setHeight(image.getHeight());
+        canvas.setWidth(image.getWidth());
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        gc.drawImage(image, 0, 0);
     }
 
     /**
@@ -107,8 +98,8 @@ public class CanvasService {
      * @param color color used to fill the canvas
      */
     public static void fill(Color color) {
-        GC.setFill(color);
-        GC.fillRect(0, 0, CANVAS.getWidth(), CANVAS.getHeight());
+        gc.setFill(color);
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
     /**
@@ -119,6 +110,6 @@ public class CanvasService {
     public static WritableImage getCanvasAsImage() {
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(Color.TRANSPARENT);
-        return CANVAS.snapshot(params, null);
+        return canvas.snapshot(params, null);
     }
 }

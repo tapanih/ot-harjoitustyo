@@ -2,6 +2,7 @@ package pixeleditor.domain.tools;
 
 import de.saxsys.javafx.test.JfxRunner;
 import de.saxsys.javafx.test.TestInJfxThread;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelReader;
 import javafx.scene.input.MouseEvent;
 import static javafx.scene.input.MouseEvent.MOUSE_DRAGGED;
@@ -27,8 +28,7 @@ public class EraserToolTest {
     
     @Before
     public void setUp() {
-        CanvasService.init();
-        CanvasService.clearAndResize(30, 30);
+        CanvasService.setCanvas(new Canvas(30, 30));
         CanvasService.fill(Color.CYAN);
     }
     

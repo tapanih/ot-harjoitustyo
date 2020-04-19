@@ -7,6 +7,7 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
@@ -34,6 +35,9 @@ public class PixelEditorUi extends Application {
 
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;
+    public static final double DEFAULT_CANVAS_WIDTH = 400;
+    public static final double DEFAULT_CANVAS_HEIGHT = 300;
+    private final Canvas canvas = new Canvas(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
     private ToolService toolService;
     private FileService fileService;
 
@@ -41,7 +45,7 @@ public class PixelEditorUi extends Application {
     public void init() throws Exception {
         this.toolService = new ToolService();
         this.fileService = new FileService();
-        CanvasService.init();
+        CanvasService.setCanvas(canvas);
     }
 
     @Override
@@ -91,7 +95,7 @@ public class PixelEditorUi extends Application {
 
         final StackPane canvasHolder = new StackPane();
         canvasHolder.setStyle("-fx-background-color: white");
-        canvasHolder.getChildren().add(CanvasService.getCanvas());
+        canvasHolder.getChildren().add(canvas);
         canvasHolder.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         borderPane.setTop(hBox);
@@ -118,15 +122,15 @@ public class PixelEditorUi extends Application {
             Platform.exit();
         });
 
-        CanvasService.getCanvas().setOnMouseClicked(e -> {
+        canvas.setOnMouseClicked(e -> {
             toolService.mousePressed(e);
         });
 
-        CanvasService.getCanvas().setOnMouseDragged(e -> {
+        canvas.setOnMouseDragged(e -> {
             toolService.mouseDragged(e);
         });
 
-        CanvasService.getCanvas().setOnMouseReleased(e -> {
+        canvas.setOnMouseReleased(e -> {
             toolService.mouseReleased(e);
         });
 

@@ -2,6 +2,7 @@ package pixeleditor.domain.tools;
 
 import de.saxsys.javafx.test.JfxRunner;
 import de.saxsys.javafx.test.TestInJfxThread;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import static javafx.scene.input.MouseEvent.MOUSE_PRESSED;
@@ -27,8 +28,7 @@ public class ColorPickerToolTest {
     
     @Before
     public void setUp() {
-        CanvasService.init();
-        CanvasService.clearAndResize(20, 30);
+        CanvasService.setCanvas(new Canvas(20, 30));
         ColorService.setColorPicker(new ColorPicker());
         ColorService.setCurrentColor(Color.WHITE);
     }
