@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 public class FileService {
+
+    /**
+     * Shows the file chooser dialog and saves canvas to a selected PNG file.
+     * @param primaryStage stage used for the file chooser dialog
+     */
     public void importToPNG(Stage primaryStage) {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
@@ -27,6 +32,10 @@ public class FileService {
         }
     }
     
+    /**
+     * Shows the file chooser dialog and imports the selected PNG file.
+     * @param primaryStage stage used for the file chooser dialog
+     */
     public void exportFromPNG(Stage primaryStage) {
         WritableImage image = CanvasService.getCanvasAsImage();
 

@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import pixeleditor.domain.CanvasService;
 
 /**
- * An eraser tool for removing individual pixels.
+ * An eraser tool that turns individual pixels transparent.
  */
 public class EraserTool extends PenTool {
 

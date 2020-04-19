@@ -2,7 +2,9 @@ package pixeleditor.domain;
 
 import javafx.scene.input.MouseEvent;
 
-
+/**
+ * An abstract class for tools that handle mouse input.
+ */
 public abstract class Tool {
 
     private final String iconFileName;

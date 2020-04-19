@@ -1,5 +1,8 @@
 package pixeleditor.domain;
 
+/**
+ * Represents a point on a 2D plane.
+ */
 public class Point {
     private final int x;
     private final int y;

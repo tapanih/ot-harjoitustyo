@@ -7,6 +7,9 @@ import pixeleditor.domain.CanvasService;
 import pixeleditor.domain.ColorService;
 import pixeleditor.domain.Tool;
 
+/**
+ * A tool that sets current color to the color of clicked pixel.
+ */
 public class ColorPickerTool extends Tool {
 
     /**
