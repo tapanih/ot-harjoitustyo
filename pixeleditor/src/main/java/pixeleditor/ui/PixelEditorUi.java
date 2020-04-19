@@ -66,7 +66,6 @@ public class PixelEditorUi extends Application {
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 
         final ToolBar toolBar = new ToolBar();
-        toolBar.setOrientation(Orientation.VERTICAL);
         toolBar.setPadding(new Insets(4, 0, 4, 4));
 
         final ToggleButton penButton = new ToolButton(ToolService.PEN_TOOL);
@@ -135,6 +134,7 @@ public class PixelEditorUi extends Application {
         });
 
         final Scene scene = new Scene(borderPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+        scene.getStylesheets().add("file:src/main/resources/css/stylesheet.css");
 
         primaryStage.setScene(scene);
         primaryStage.show();

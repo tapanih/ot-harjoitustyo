@@ -13,8 +13,6 @@ public class ColorChooser extends ColorPicker {
     public ColorChooser() {
         super();
         this.getStyleClass().add("button");
-        this.setMaxWidth(27);
-        this.setStyle("-fx-color-label-visible: false;");        
         init();
     }   
 

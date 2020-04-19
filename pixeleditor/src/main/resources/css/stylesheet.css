@@ -1,0 +1,23 @@
+.color-picker {
+    -fx-border-radius: 2; 
+    -fx-color-rect-width: 23px;
+    -fx-color-rect-height: 23px;
+    -fx-pref-width: 27px;
+    -fx-pref-height: 28px;
+    -fx-max-width: 28px;
+    -fx-color-label-visible: false;
+}
+
+.color-picker .color-picker-label {
+    -fx-padding: 0;
+}
+
+.stack-pane {
+    -fx-background-color: white;
+}
+
+.tool-bar {
+    -fx-min-width: 36px;
+    -fx-orientation: vertical;
+}
+
