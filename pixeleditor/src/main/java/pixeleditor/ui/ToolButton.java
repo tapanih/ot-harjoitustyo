@@ -11,7 +11,7 @@ public class ToolButton extends ToggleButton {
     ToolButton(Tool tool) {
         super();
         this.setUserData(tool);
-        Image image = new Image("file:src/main/resources/images/" + tool.getIconFileName());
+        Image image = new Image("/images/" + tool.getIconFileName());
         this.setGraphic(new ImageView(image));
         this.setPadding(new Insets(2, 2, 2, 2));
     }

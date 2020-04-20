@@ -71,7 +71,7 @@ public class PenToolTest {
         pen.mouseDragged(e3);
         pen.mouseReleased(e4);
 
-        PixelReader pixelReader = CanvasService.getPixelReader(Color.TRANSPARENT);;
+        PixelReader pixelReader = CanvasService.getPixelReader(Color.TRANSPARENT);
 
         assertEquals(Color.BLACK, pixelReader.getColor(20, 10));
         assertEquals(Color.BLACK, pixelReader.getColor(21, 10));

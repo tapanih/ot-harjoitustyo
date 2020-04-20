@@ -134,7 +134,7 @@ public class PixelEditorUi extends Application {
         });
 
         final Scene scene = new Scene(borderPane, WINDOW_WIDTH, WINDOW_HEIGHT);
-        scene.getStylesheets().add("file:src/main/resources/css/stylesheet.css");
+        scene.getStylesheets().add("/css/stylesheet.css");
 
         primaryStage.setScene(scene);
         primaryStage.show();
