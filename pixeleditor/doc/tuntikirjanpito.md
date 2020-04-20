@@ -9,4 +9,6 @@
 |30.3 |5h | Ominaisuuksien lisäämistä |
 |7.4  |6h | Paranneltu työkalujen toimintaa, lisätty testi ja päivitetty dokumentaatiota
 |18.4 |8h | Lisätty työkalujen nappeihin kuvat. Toteutettu värin valinta, värin poiminta ja sankkotäyttö. Otettu Javadoc käyttöön.
-| Yht. | 31h | |
+|19.4 |8h | Refaktorointia ja koodin kommentointia.
+|20.4 |4h | Dokumentaation päivitystä ja Github-release
+| Yht. | 43h | |

@@ -1,5 +1,9 @@
 # Ohjelmistotekniikka, harjoitustyö
 
+## Kuvaus
+
+Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia PNG-kuvaformaatissa.
+
 ## Dokumentaatio
 
 [Vaatimusmäärittely](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/vaatimusmaarittely.md)
@@ -7,6 +11,10 @@
 [Arkkitehtuurikuvaus](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/arkkitehtuuri.md)
 
 [Tuntikirjanpito](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/tuntikirjanpito.md)
+
+## Releaset
+
+[Viikko 5](https://github.com/tapanih/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Komentorivitoiminnot
 
@@ -34,6 +42,22 @@ mvn jacoco:report
 ```
 
 ja raportti löytyy tämän jälkeen tiedostosta *target/site/jacoco/index.html*
+
+### Suoritettavan jarin generointi
+
+Suoritettavan jar-tiedoston saa generoitua komennolla
+```
+mvn package
+```
+Jar-tiedosto löytyy tämän jälkeen hakemistosta *target* nimellä *pixeleditor-1.0-SNAPSHOT.jar*
+
+### Javadoc ###
+
+Javadocin saa generoitua komennolla
+```
+mvn javadoc:javadoc
+```
+Tämän jälkeen Javadocia voi tarkastella avaamalla tiedosto *target/site/apidocs/index.html*
 
 ### Checkstyle ###
 
