@@ -11,10 +11,13 @@ import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * A class that defines a dialog for creating a new image.
+ */
 public class NewImageDialog extends Dialog<Dimension2D> {
 
     /**
-     * Defines a dialog for creating a new image.
+     * Builds a new image dialog.
      * @param primaryStage the owner of this dialog
      */
     public NewImageDialog(Stage primaryStage) {

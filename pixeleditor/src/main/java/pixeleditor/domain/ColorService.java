@@ -13,7 +13,7 @@ public class ColorService {
     /**
      * Sets the ColorPicker element that should be updated when color is picked
      * through other means (f.ex. with the color picker tool).
-     * @param colorPicker
+     * @param colorPicker ColorPicker to be set
      */
     public static void setColorPicker(ColorPicker colorPicker) {
         picker = colorPicker;

@@ -1,4 +1,4 @@
-/*
- * Main package
+/**
+ * Main package.
  */
 package pixeleditor;

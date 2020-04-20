@@ -30,6 +30,9 @@ import pixeleditor.domain.FileService;
 import pixeleditor.domain.Tool;
 import pixeleditor.domain.ToolService;
 
+/**
+ * A class that contains the main user interface.
+ */
 public class PixelEditorUi extends Application {
 
     public static final int WINDOW_WIDTH = 800;

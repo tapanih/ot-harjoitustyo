@@ -3,6 +3,9 @@ package pixeleditor.ui;
 import javafx.scene.control.ColorPicker;
 import pixeleditor.domain.ColorService;
 
+/**
+ * A subclass of ColorPicker with custom styling that is also connected to the ColorService.
+ */
 public class ColorChooser extends ColorPicker {
 
     /**
