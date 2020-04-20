@@ -19,10 +19,18 @@ public class ToolService {
 
     private Tool currentTool;
     
+    /**
+     * Updates the currently selected tool.
+     * @param tool new selected tool
+     */
     public void setCurrentTool(Tool tool) {
         currentTool = tool;
     }
 
+    /**
+     * Returns the currently selected tool.
+     * @return currently selected tool
+     */
     public Tool getCurrentTool() {
         return currentTool;
     }

@@ -9,6 +9,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
+/**
+ * An utility class that handles saving and opening image files.
+ */
 public class FileService {
 
     /**

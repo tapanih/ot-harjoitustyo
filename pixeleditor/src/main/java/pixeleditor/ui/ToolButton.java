@@ -6,6 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import pixeleditor.domain.Tool;
 
+/**
+ * A button element that is connected to a tool.
+ */
 public class ToolButton extends ToggleButton {
 
     ToolButton(Tool tool) {

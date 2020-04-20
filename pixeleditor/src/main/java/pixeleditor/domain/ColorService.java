@@ -8,12 +8,21 @@ import javafx.scene.paint.Color;
  */
 public class ColorService {
     private static Color currentColor = Color.WHITE;
-    private static ColorPicker colorPicker;
+    private static ColorPicker picker;
 
-    public static void setColorPicker(ColorPicker picker) {
-        colorPicker = picker;
+    /**
+     * Sets the ColorPicker element that should be updated when color is picked
+     * through other means (f.ex. with the color picker tool).
+     * @param colorPicker
+     */
+    public static void setColorPicker(ColorPicker colorPicker) {
+        picker = colorPicker;
     }  
 
+    /**
+     * Returns the currently selected color.
+     * @return current color
+     */
     public static Color getCurrentColor() {
         return currentColor;
     }
@@ -24,6 +33,6 @@ public class ColorService {
      */
     public static void setCurrentColor(Color color) {
         currentColor = color;
-        colorPicker.setValue(color);
-    }  
+        picker.setValue(color);
+    }
 }

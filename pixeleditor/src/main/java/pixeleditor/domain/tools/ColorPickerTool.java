@@ -37,8 +37,10 @@ public class ColorPickerTool extends Tool {
         PixelReader reader = CanvasService.getPixelReader(Color.TRANSPARENT);
         Color color = reader.getColor((int) e.getX(), (int) e.getY());
         if (color.equals(Color.TRANSPARENT)) {
+            // Picking transparent color defaults to black.
             ColorService.setCurrentColor(Color.BLACK);
         } else {
+            // Picked color is always fully opaque
             ColorService.setCurrentColor(Color.hsb(
                 color.getHue(), color.getSaturation(), color.getBrightness())
             );

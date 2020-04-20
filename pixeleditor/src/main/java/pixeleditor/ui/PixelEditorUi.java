@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
@@ -63,6 +62,8 @@ public class PixelEditorUi extends Application {
         final MenuItem exitMenuItem = new MenuItem("Exit");
         fileMenu.getItems().addAll(newMenuItem, importMenuItem, exportMenuItem, exitMenuItem);
         menuBar.getMenus().add(fileMenu);
+
+        // Bind menu bar width to window width so it doesn't cut off and look weird when window is resized
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 
         final ToolBar toolBar = new ToolBar();
@@ -77,24 +78,31 @@ public class PixelEditorUi extends Application {
         toolBar.getItems().addAll(penButton, eraserButton, colorPickerButton, bucketToolButton, colorChooser);
 
         final ToggleGroup toolGroup = new ToggleGroup();
-        toolGroup.selectedToggleProperty().addListener((ov, toggle, newToggle) -> {
-            if (newToggle != null) {
-                toolService.setCurrentTool((Tool) toolGroup.getSelectedToggle().getUserData());
-            }
-        });
+
         penButton.setToggleGroup(toolGroup);
         eraserButton.setToggleGroup(toolGroup);
         colorPickerButton.setToggleGroup(toolGroup);
         bucketToolButton.setToggleGroup(toolGroup);
 
+        // Add a listener that updates the currently selected tool when selected button changes
+        toolGroup.selectedToggleProperty().addListener((ov, toggle, newToggle) -> {
+            if (newToggle != null) {
+                toolService.setCurrentTool((Tool) toolGroup.getSelectedToggle().getUserData());
+            }
+        });
+
+        // Bind tool bar height to window height so it doesn't cut off and look weird when window is resized
         toolBar.prefHeightProperty().bind(primaryStage.heightProperty());
 
         final VBox vBox = new VBox(toolBar);
         final HBox hBox = new HBox(menuBar);
 
+        // background for the canvas
         final StackPane canvasHolder = new StackPane();
         canvasHolder.setStyle("-fx-background-color: white");
         canvasHolder.getChildren().add(canvas);
+
+        // Make sure the background matches the size of the canvas
         canvasHolder.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         borderPane.setTop(hBox);
@@ -103,6 +111,7 @@ public class PixelEditorUi extends Application {
 
         newMenuItem.setOnAction(e -> {
             Dialog<Dimension2D> dialog = new NewImageDialog(primaryStage);
+            // result contains dimensions of new image or null depending on user action
             Optional<Dimension2D> result = dialog.showAndWait();
             if (result.isPresent()) {
                 CanvasService.clearAndResize(result.get().getWidth(), result.get().getHeight());

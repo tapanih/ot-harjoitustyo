@@ -66,15 +66,20 @@ public class PenTool extends Tool {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        // if starting point of a line is set, we can draw it
         if (prevMouseLocation != null) {
+            // mouse events skip pixels when mouse is dragged along the canvas with sufficient speed
+            // so we draw a line between current and last mouse position
             drawLine((int) prevMouseLocation.getX(), (int) prevMouseLocation.getY(),
                     (int) e.getX(), (int) e.getY(), ColorService.getCurrentColor());
         }
+        // set a new starting point
         prevMouseLocation = new Point2D(e.getX(), e.getY());
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        // clear line
         prevMouseLocation = null;
     }
 }
