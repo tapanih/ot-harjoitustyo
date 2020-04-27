@@ -1,5 +1,6 @@
 package pixeleditor.ui;
 
+import java.io.File;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -42,6 +43,7 @@ public class PixelEditorUi extends Application {
     private final Canvas canvas = new Canvas(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
     private ToolService toolService;
     private FileService fileService;
+    private final ImageFileChooser imageFileChooser = new ImageFileChooser();
 
     @Override
     public void init() throws Exception {
@@ -122,11 +124,13 @@ public class PixelEditorUi extends Application {
         });
 
         importMenuItem.setOnAction(e -> {
-            fileService.importToPNG(primaryStage);
+            File file = imageFileChooser.showOpenDialog(primaryStage);
+            fileService.importFrom(file);
         });
 
         exportMenuItem.setOnAction(e -> {
-            fileService.exportFromPNG(primaryStage);
+            File file = imageFileChooser.showSaveDialog(primaryStage);
+            fileService.exportTo(file);
         });
 
         exitMenuItem.setOnAction(e -> {

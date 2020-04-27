@@ -5,8 +5,6 @@ import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 /**
@@ -14,17 +12,11 @@ import javax.imageio.ImageIO;
  */
 public class FileService {
 
-    /**
-     * Shows the file chooser dialog and saves canvas to a selected PNG file.
-     * @param primaryStage stage used for the file chooser dialog
+     /**
+     * Shows the file chooser dialog and imports the selected PNG file.
+     * @param file image file
      */
-    public void importToPNG(Stage primaryStage) {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        File file = fileChooser.showOpenDialog(primaryStage);
-
+    public void importFrom(File file) {
         try {
             if (file != null) {
                 Image image = new Image(file.toURI().toString());
@@ -36,18 +28,11 @@ public class FileService {
     }
     
     /**
-     * Shows the file chooser dialog and imports the selected PNG file.
-     * @param primaryStage stage used for the file chooser dialog
+     * Shows the file chooser dialog and saves canvas to a selected PNG file.
+     * @param file image file
      */
-    public void exportFromPNG(Stage primaryStage) {
+    public void exportTo(File file) {
         WritableImage image = CanvasService.getCanvasAsImage();
-
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        File file = fileChooser.showSaveDialog(primaryStage);
-
         try {
             if (file != null) {
                 ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
