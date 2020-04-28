@@ -34,7 +34,7 @@ public class ImageFileChooser {
     public File showOpenDialog(Stage primaryStage) {
         File file = openFileChooser.showOpenDialog(primaryStage);
         ExtensionFilter filter = openFileChooser.getSelectedExtensionFilter();
-        if (!filter.equals(allFilter)) {
+        if (file != null && !filter.equals(allFilter)) {
             selectedExtension = filter.getExtensions().get(0).substring(2);
         }
         return file;
@@ -47,7 +47,9 @@ public class ImageFileChooser {
      */
     public File showSaveDialog(Stage primaryStage) {
         File file = saveFileChooser.showSaveDialog(primaryStage);
-        selectedExtension = saveFileChooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2);
+        if (file != null) {
+            selectedExtension = saveFileChooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2);
+        }
         return file;
     }
 

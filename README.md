@@ -18,6 +18,8 @@ Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia 
 
 [Viikko 5](https://github.com/tapanih/ot-harjoitustyo/releases/tag/viikko5)
 
+[Viikko 6](https://github.com/tapanih/ot-harjoitustyo/releases/tag/viikko6)
+
 ## Komentorivitoiminnot
 
 ### Suorittaminen
