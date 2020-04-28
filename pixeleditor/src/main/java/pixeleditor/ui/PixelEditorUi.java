@@ -128,9 +128,8 @@ public class PixelEditorUi extends Application {
 
         importMenuItem.setOnAction(e -> {
             File file = imageFileChooser.showOpenDialog(primaryStage);
-            String extension = imageFileChooser.getSelectedExtensionAsString();
             try {
-                fileService.importFrom(file, extension);
+                fileService.importFrom(file);
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }

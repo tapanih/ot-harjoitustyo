@@ -27,10 +27,9 @@ public class FileService {
      /**
      * Imports the selected image file.
      * @param file image file
-     * @param ext extension selected
      * @throws java.io.IOException throws IOException if file could not be opened
      */
-    public void importFrom(File file, String ext) throws IOException {
+    public void importFrom(File file) throws IOException {
         if (file != null) {
             Image image = new Image(file.toURI().toString());
             CanvasService.drawImageAndResize(image);

@@ -32,7 +32,7 @@ public class FileServiceTest {
     public void pngImageOpensCorrectly() throws URISyntaxException, IOException {
         URI uri = getClass().getResource("/images/pngtest.png").toURI();
         File file = new File(uri);
-        fileService.importFrom(file, "png");
+        fileService.importFrom(file);
 
         PixelReader reader = CanvasService.getPixelReader(Color.TRANSPARENT);
         
