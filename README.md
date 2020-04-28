@@ -2,13 +2,15 @@
 
 ## Kuvaus
 
-Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia PNG-kuvaformaatissa.
+Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia muutamassa kuvaformaatissa.
 
 ## Dokumentaatio
 
 [Vaatimusmäärittely](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/vaatimusmaarittely.md)
 
 [Arkkitehtuurikuvaus](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/arkkitehtuuri.md)
+
+[Käyttöohje](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/kayttoohje.md)
 
 [Tuntikirjanpito](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/tuntikirjanpito.md)
 
@@ -38,7 +40,7 @@ mvn test
 Testikattavuusraportti luodaan komennolla
 
 ```
-mvn jacoco:report
+mvn test jacoco:report
 ```
 
 ja raportti löytyy tämän jälkeen tiedostosta *target/site/jacoco/index.html*
