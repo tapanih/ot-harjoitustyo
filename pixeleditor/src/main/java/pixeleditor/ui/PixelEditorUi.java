@@ -3,8 +3,6 @@ package pixeleditor.ui;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Dimension2D;
