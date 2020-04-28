@@ -64,6 +64,8 @@ Pipettityökalu on toteutettu luokassa *ColorPickerTool*. Kun työkalupalkista o
 
 ![Pipettityökalun sekvenssi](images/sekvenssi2.png)
 
+Piirtoalueen tapahtumankäsittelijä kutsuu työkalupalvelun *ToolService* metodia *mousePressed*, joka ohjaa hiiritapahtuman valittuna olevalle työkalulle, joka on kuvatussa tilanteessa pipettityökalu. Pipettityökalu tarvitsee *PixelReader* -olion, jolla piirtoalueen pikseleitä voi lukea. Tämän se hakee piirtoalueelta *CanvasServicen* kautta. Sitten pipettityökalu kutsuu *ColorService*-luokan metodia *setCurrentColor*, joka päivittää valittuna olevan värin. *ColorService* kutsuu JavaFX:n *ColorPicker*-olion metodia *setValue*, jolloin värin vaihtuminen päivittyy myös käyttöliittymässä.
+
 #### Värin valinta
 
 Värin valinta käyttää JavaFX:n valmista ColorPicker-luokkaa.
