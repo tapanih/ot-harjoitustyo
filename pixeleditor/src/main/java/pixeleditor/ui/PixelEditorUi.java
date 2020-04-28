@@ -1,7 +1,10 @@
 package pixeleditor.ui;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Dimension2D;
@@ -62,8 +65,8 @@ public class PixelEditorUi extends Application {
         final Menu fileMenu = new Menu("File");
 
         final MenuItem newMenuItem = new MenuItem("New");
-        final MenuItem importMenuItem = new MenuItem("Import from PNG...");
-        final MenuItem exportMenuItem = new MenuItem("Export to PNG...");
+        final MenuItem importMenuItem = new MenuItem("Import from...");
+        final MenuItem exportMenuItem = new MenuItem("Export to...");
         final MenuItem exitMenuItem = new MenuItem("Exit");
         fileMenu.getItems().addAll(newMenuItem, importMenuItem, exportMenuItem, exitMenuItem);
         menuBar.getMenus().add(fileMenu);
@@ -125,12 +128,22 @@ public class PixelEditorUi extends Application {
 
         importMenuItem.setOnAction(e -> {
             File file = imageFileChooser.showOpenDialog(primaryStage);
-            fileService.importFrom(file);
+            String extension = imageFileChooser.getSelectedExtensionAsString();
+            try {
+                fileService.importFrom(file, extension);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         });
 
         exportMenuItem.setOnAction(e -> {
             File file = imageFileChooser.showSaveDialog(primaryStage);
-            fileService.exportTo(file);
+            String extension = imageFileChooser.getSelectedExtensionAsString();
+            try {
+                fileService.exportTo(file, extension);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         });
 
         exitMenuItem.setOnAction(e -> {

@@ -2,22 +2,28 @@ package pixeleditor.ui;
 
 import java.io.File;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 /**
  * A wrapper class for JavaFX FileChoosers.
  */
 public class ImageFileChooser {
-    FileChooser openFileChooser = new FileChooser();
-    FileChooser saveFileChooser = new FileChooser();
+    private final ExtensionFilter allFilter = new ExtensionFilter("All files", "*");
+    private final ExtensionFilter pngFilter = new ExtensionFilter("PNG files (*.png)", "*.png");
+    private final ExtensionFilter bmpFilter = new ExtensionFilter("BMP files (*.bmp)", "*.bmp");
+    private final ExtensionFilter gifFilter = new ExtensionFilter("GIF files (*.gif)", "*.gif");
+    private final ExtensionFilter tiffFilter = new ExtensionFilter("TIFF files (*.tiff, *.tif)", "*.tif", "*.tiff");
+    private final FileChooser saveFileChooser = new FileChooser();
+    private final FileChooser openFileChooser = new FileChooser();
+    private String selectedExtension = null;
 
     /**
      * A default constructor.
      */
     public ImageFileChooser() {
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
-        openFileChooser.getExtensionFilters().add(extFilter);
-        saveFileChooser.getExtensionFilters().add(extFilter);
+        saveFileChooser.getExtensionFilters().addAll(pngFilter, bmpFilter, gifFilter, tiffFilter);
+        openFileChooser.getExtensionFilters().addAll(allFilter, pngFilter, bmpFilter, gifFilter);
     }
 
     /**
@@ -26,7 +32,12 @@ public class ImageFileChooser {
      * @return selected file or null if none selected
      */
     public File showOpenDialog(Stage primaryStage) {
-        return openFileChooser.showOpenDialog(primaryStage);
+        File file = openFileChooser.showOpenDialog(primaryStage);
+        ExtensionFilter filter = openFileChooser.getSelectedExtensionFilter();
+        if (!filter.equals(allFilter)) {
+            selectedExtension = filter.getExtensions().get(0).substring(2);
+        }
+        return file;
     }
     
     /**
@@ -35,6 +46,16 @@ public class ImageFileChooser {
      * @return selected file or null if none selected
      */
     public File showSaveDialog(Stage primaryStage) {
-        return saveFileChooser.showSaveDialog(primaryStage);
+        File file = saveFileChooser.showSaveDialog(primaryStage);
+        selectedExtension = saveFileChooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2);
+        return file;
+    }
+
+    /**
+     * Returns the last selected extension as a string (without a dot).
+     * @return selected extension as a string without a dot
+     */
+    public String getSelectedExtensionAsString() {
+        return selectedExtension;
     }
 }

@@ -109,11 +109,12 @@ public class CanvasService {
     /**
      * Returns the canvas as a WritableImage that can be exported to a file.
      *
+     * @param fillColor color used to fill transparency (useful when exporting to a format that does not support an alpha channel)
      * @return WritableImage that can be exported
      */
-    public static WritableImage getCanvasAsImage() {
+    public static WritableImage getCanvasAsImage(Color fillColor) {
         SnapshotParameters params = new SnapshotParameters();
-        params.setFill(Color.TRANSPARENT);
+        params.setFill(fillColor);
         return canvas.snapshot(params, null);
     }
 }
