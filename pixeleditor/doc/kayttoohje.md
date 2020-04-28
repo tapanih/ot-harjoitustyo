@@ -1,5 +1,14 @@
 ## Käyttöohje
 
+### Sovelluksen käynnistäminen
+
+Lataa tiedosto [pixeleditor-1.1.jar](https://github.com/tapanih/ot-harjoitustyo/releases/tag/viikko6) ja käynnistä sovellus komennolla
+```
+java -jar pixeleditor-1.1.jar
+```
+
+### Sovelluksen käyttö
+
 Sovellus käynnistyy päänäkymään, joka näyttää tällä hetkellä seuraavalta:
 
 ![Kuvakaappaus](images/kuvakaappaus.png)
