@@ -6,19 +6,22 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
 import javax.imageio.ImageIO;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
 @RunWith(JfxRunner.class)
 public class FileServiceTest {
+
+    @Rule
+    public final TemporaryFolder folder = new TemporaryFolder();
     private static FileService fileService;
 
     @BeforeClass
@@ -61,17 +64,13 @@ public class FileServiceTest {
     }
 
     private void testExportingWithExtension(String ext) throws URISyntaxException, IOException {
-        String uriStr = getClass().getResource("/images/").toURI().toString() + "newfile." + ext;
-        URI uri = URI.create(uriStr);
-        File file = new File(uri);
+        String fileName = "newfile." + ext;
+        File file = folder.newFile(fileName);
 
         // File was created
         assertTrue(fileService.exportTo(file, ext));
 
         // File created is an image file
         assertTrue(ImageIO.read(file) != null);
-
-        // A file was removed
-        assertTrue(Files.deleteIfExists(Path.of(uri)));
     }
 }
