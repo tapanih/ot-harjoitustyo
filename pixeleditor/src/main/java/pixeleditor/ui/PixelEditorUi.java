@@ -17,8 +17,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
@@ -104,8 +106,9 @@ public class PixelEditorUi extends Application {
         final HBox hBox = new HBox(menuBar);
 
         // background for the canvas
+        final Image bgPattern = new Image("/images/bgpattern.png");
         final StackPane canvasHolder = new StackPane();
-        canvasHolder.setStyle("-fx-background-color: white");
+        canvasHolder.setBackground(new Background(new BackgroundImage(bgPattern, null, null, null, null)));
         canvasHolder.getChildren().add(canvas);
 
         // Make sure the background matches the size of the canvas
