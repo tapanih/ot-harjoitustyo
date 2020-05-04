@@ -13,4 +13,5 @@
 |20.4 |4h | Dokumentaation päivitystä ja Github-release
 |27.4 |6h | Refaktoroitu tiedostojen käsittelyä ja kirjoitettu niille testit. Lisätty tuki uusille kuvaformaateille.
 |28.4 |8h | Korjattu Javadoc. Kirjoitettu dokumentaatiota ja  tehty GitHub-release
-| Yht. | 57h | |
+|4.5 | 2h | Testausdokumentin kirjoittamista ja virheiden käsittelyä.
+| Yht. | 59h | |
