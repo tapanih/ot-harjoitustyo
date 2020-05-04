@@ -9,6 +9,8 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
@@ -132,7 +134,11 @@ public class PixelEditorUi extends Application {
             try {
                 fileService.importFrom(file);
             } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("An error occured");
+                alert.setContentText("An error occured while opening file.");
+                alert.showAndWait();
             }
         });
 
@@ -140,9 +146,20 @@ public class PixelEditorUi extends Application {
             File file = imageFileChooser.showSaveDialog(primaryStage);
             String extension = imageFileChooser.getSelectedExtensionAsString();
             try {
-                fileService.exportTo(file, extension);
+                boolean success = fileService.exportTo(file, extension);
+                if (!success) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("An error occured");
+                    alert.setContentText("An error occured while exporting the image.");
+                    alert.showAndWait();
+                }
             } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("An error occured");
+                alert.setContentText("An error occured while writing to file.");
+                alert.showAndWait();
             }
         });
 
