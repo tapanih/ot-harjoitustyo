@@ -27,7 +27,7 @@ public class FileServiceTest {
     @BeforeClass
     public static void setUpClass() {
         fileService = new FileService();
-        CanvasService.setCanvas(new Canvas(2, 2));
+        CanvasService.setLayers(new Canvas[]{new Canvas(2, 2)});
     }
     
     @Test

@@ -33,7 +33,7 @@ public class PenToolTest {
     
     @Before
     public void setUp() {
-        CanvasService.setCanvas(new Canvas(30, 30));
+        CanvasService.setLayers(new Canvas[]{new Canvas(30, 30)});
     }
     
     @Test

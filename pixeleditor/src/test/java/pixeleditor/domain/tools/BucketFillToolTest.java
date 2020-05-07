@@ -29,7 +29,7 @@ public class BucketFillToolTest {
     
     @Before
     public void setUp() {
-        CanvasService.setCanvas(new Canvas(4, 3));
+        CanvasService.setLayers(new Canvas[]{new Canvas(4, 3)});
         ColorService.setColorPicker(new ColorPicker());
     }
 

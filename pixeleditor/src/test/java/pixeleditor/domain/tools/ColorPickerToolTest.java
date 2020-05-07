@@ -28,7 +28,7 @@ public class ColorPickerToolTest {
 
     @Before
     public void setUp() {
-        CanvasService.setCanvas(new Canvas(10, 10));
+        CanvasService.setLayers(new Canvas[]{new Canvas(10, 10)});
         ColorService.setColorPicker(new ColorPicker());
         ColorService.setCurrentColor(Color.WHITE);
     }

@@ -2,6 +2,9 @@ package pixeleditor.ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -45,7 +48,8 @@ public class PixelEditorUi extends Application {
     public static final int WINDOW_HEIGHT = 600;
     public static final double DEFAULT_CANVAS_WIDTH = 400;
     public static final double DEFAULT_CANVAS_HEIGHT = 300;
-    private final Canvas canvas = new Canvas(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
+    public static final int LAYER_COUNT = 10;
+    private final Canvas[] layers = new Canvas[LAYER_COUNT];
     private ToolService toolService;
     private FileService fileService;
     private final ImageFileChooser imageFileChooser = new ImageFileChooser();
@@ -54,7 +58,10 @@ public class PixelEditorUi extends Application {
     public void init() throws Exception {
         this.toolService = new ToolService();
         this.fileService = new FileService();
-        CanvasService.setCanvas(canvas);
+        for (int i = 0; i < layers.length; i++) {
+            layers[i] = new Canvas(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
+        }
+        CanvasService.setLayers(layers);
     }
 
     @Override
@@ -104,20 +111,53 @@ public class PixelEditorUi extends Application {
         // Bind tool bar height to window height so it doesn't cut off and look weird when window is resized
         toolBar.prefHeightProperty().bind(primaryStage.heightProperty());
 
-        final VBox vBox = new VBox(toolBar);
+        final ToolBar layerBar = new ToolBar();
+
+        final ToggleButton[] layerButtons = new ToggleButton[LAYER_COUNT];
+        for (int i = 0; i < LAYER_COUNT; i++) {
+            layerButtons[i] = new ToggleButton("Layer " + (LAYER_COUNT - i - 1));
+        }
+
+        layerBar.getItems().addAll(layerButtons);
+
+        final ToggleGroup layerGroup = new ToggleGroup();
+
+        for (ToggleButton layerButton : layerButtons) {
+            layerButton.setToggleGroup(layerGroup);
+        }
+
+        for (int i = 0; i < LAYER_COUNT; i++) {
+            layerButtons[i].setUserData(LAYER_COUNT - i - 1);
+        }
+
+        layerGroup.selectedToggleProperty().addListener((ov, toggle, newToggle) -> {
+            if (newToggle != null) {
+                int index = (int) layerGroup.getSelectedToggle().getUserData();
+                CanvasService.setCurrentLayer(layers[index]);
+            }
+        });
+
+        layerGroup.selectToggle(layerButtons[LAYER_COUNT - 1]);
+
+        // Bind layer menu height to window height so it doesn't cut off and look weird when window is resized
+        layerBar.prefHeightProperty().bind(primaryStage.heightProperty());
+
+        final VBox vBoxLeft = new VBox(toolBar);
+        final VBox vBoxRight = new VBox(layerBar);
         final HBox hBox = new HBox(menuBar);
 
         // background for the canvas
         final Image bgPattern = new Image("/images/bgpattern.png");
         final StackPane canvasHolder = new StackPane();
         canvasHolder.setBackground(new Background(new BackgroundImage(bgPattern, null, null, null, null)));
-        canvasHolder.getChildren().add(canvas);
+        canvasHolder.getChildren().addAll(layers);
 
         // Make sure the background matches the size of the canvas
         canvasHolder.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         borderPane.setTop(hBox);
-        borderPane.setLeft(vBox);
+        borderPane.setLeft(vBoxLeft);
+        borderPane.setRight(vBoxRight);
         borderPane.setCenter(canvasHolder);
 
         newMenuItem.setOnAction(e -> {
@@ -167,15 +207,15 @@ public class PixelEditorUi extends Application {
             Platform.exit();
         });
 
-        canvas.setOnMouseClicked(e -> {
+        canvasHolder.setOnMouseClicked(e -> {
             toolService.mousePressed(e);
         });
 
-        canvas.setOnMouseDragged(e -> {
+        canvasHolder.setOnMouseDragged(e -> {
             toolService.mouseDragged(e);
         });
 
-        canvas.setOnMouseReleased(e -> {
+        canvasHolder.setOnMouseReleased(e -> {
             toolService.mouseReleased(e);
         });
 

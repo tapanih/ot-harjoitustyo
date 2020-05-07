@@ -2,7 +2,6 @@ package pixeleditor.domain;
 
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
@@ -14,17 +13,27 @@ import javafx.scene.paint.Color;
  * through various utility methods.
  */
 public class CanvasService {
-    private static Canvas canvas;
-    private static GraphicsContext gc;
+    private static Canvas[] layers;
+    private static Canvas currentLayer;
 
     /**
-     * Sets the canvas and initializes it with correct settings.
-     * @param newCanvas new canvas
+     * Sets the list of layers and initializes them with correct settings.
+     * @param layerList list of canvas instances that acts as layers
      */
-    public static void setCanvas(Canvas newCanvas) {
-        canvas = newCanvas;
-        gc = canvas.getGraphicsContext2D();
-        gc.setImageSmoothing(false);
+    public static void setLayers(Canvas[] layerList) {
+        layers = layerList;
+        for (Canvas layer : layers) {
+            layer.getGraphicsContext2D().setImageSmoothing(false);
+        }
+        currentLayer = layers[0];
+    }
+
+     /**
+     * Sets the current layer.
+     * @param layer layer to be set as the current layer
+     */
+    public static void setCurrentLayer(Canvas layer) {
+        currentLayer = layer;
     }
 
     /**
@@ -40,7 +49,7 @@ public class CanvasService {
     public static PixelReader getPixelReader(Color fillColor) {
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(fillColor);
-        return canvas.snapshot(params, null).getPixelReader();
+        return currentLayer.snapshot(params, null).getPixelReader();
     }
 
     /**
@@ -50,7 +59,7 @@ public class CanvasService {
      * @return PixelWriter for writing color values to individual pixels
      */
     public static PixelWriter getPixelWriter() {
-        return gc.getPixelWriter();
+        return currentLayer.getGraphicsContext2D().getPixelWriter();
     }
 
     /**
@@ -59,7 +68,7 @@ public class CanvasService {
      * @return height of the canvas
      */
     public static int getHeight() {
-        return (int) canvas.getHeight();
+        return (int) currentLayer.getHeight();
     }
 
     /**
@@ -68,19 +77,22 @@ public class CanvasService {
      * @return width of the canvas
      */
     public static int getWidth() {
-        return (int) canvas.getWidth();
+        return (int) currentLayer.getWidth();
     }
 
     /**
-     * Clears the current canvas and resizes it to match parameters.
+     * Clears the layers and resizes them to match parameters.
      *
      * @param width  width of the new canvas
      * @param height height of the new canvas
      */
     public static void clearAndResize(double width, double height) {
-        canvas.setHeight(height);
-        canvas.setWidth(width);
-        gc.clearRect(0, 0, width, height);
+        for (Canvas layer : layers) {
+            layer.setHeight(height);
+            layer.setWidth(width);
+            layer.getGraphicsContext2D().clearRect(0, 0, width, height);
+        }
+        currentLayer = layers[0];
     }
 
     /**
@@ -90,31 +102,40 @@ public class CanvasService {
      * @param image image to draw on the canvas
      */
     public static void drawImageAndResize(Image image) {
-        canvas.setHeight(image.getHeight());
-        canvas.setWidth(image.getWidth());
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        gc.drawImage(image, 0, 0);
+        for (Canvas layer : layers) {
+            layer.setHeight(image.getHeight());
+            layer.setWidth(image.getWidth());
+            layer.getGraphicsContext2D().clearRect(0, 0, layer.getWidth(), layer.getHeight());
+        }
+        currentLayer = layers[0];
+        currentLayer.getGraphicsContext2D().drawImage(image, 0, 0);
     }
 
     /**
-     * Fills the canvas with the provided color. Used in tests.
+     * Fills the current layer with the provided color. Used in tests.
      *
      * @param color color used to fill the canvas
      */
     public static void fill(Color color) {
-        gc.setFill(color);
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        currentLayer.getGraphicsContext2D().setFill(color);
+        currentLayer.getGraphicsContext2D().fillRect(0, 0, currentLayer.getWidth(), currentLayer.getHeight());
     }
 
     /**
-     * Returns the canvas as a WritableImage that can be exported to a file.
+     * Returns the drawing area as a WritableImage that can be exported to a file.
      *
      * @param fillColor color used to fill transparency (useful when exporting to a format that does not support an alpha channel)
      * @return WritableImage that can be exported
      */
     public static WritableImage getCanvasAsImage(Color fillColor) {
+        Canvas combinedCanvas = new Canvas(currentLayer.getWidth(), currentLayer.getHeight());
+        for (Canvas layer : layers) {
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            combinedCanvas.getGraphicsContext2D().drawImage(layer.snapshot(params, null), 0, 0);
+        }
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(fillColor);
-        return canvas.snapshot(params, null);
+        return combinedCanvas.snapshot(params, null);
     }
 }
