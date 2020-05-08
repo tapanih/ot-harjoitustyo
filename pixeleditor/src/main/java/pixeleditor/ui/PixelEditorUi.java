@@ -1,10 +1,8 @@
 package pixeleditor.ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -52,7 +50,7 @@ public class PixelEditorUi extends Application {
     private final Canvas[] layers = new Canvas[LAYER_COUNT];
     private ToolService toolService;
     private FileService fileService;
-    private final ImageFileChooser imageFileChooser = new ImageFileChooser();
+    private final FileChoosers fileChooser = new FileChoosers();
 
     @Override
     public void init() throws Exception {
@@ -74,10 +72,12 @@ public class PixelEditorUi extends Application {
         final Menu fileMenu = new Menu("File");
 
         final MenuItem newMenuItem = new MenuItem("New");
+        final MenuItem openMenuItem = new MenuItem("Open project");
+        final MenuItem saveMenuItem = new MenuItem("Save project");
         final MenuItem importMenuItem = new MenuItem("Import from...");
         final MenuItem exportMenuItem = new MenuItem("Export to...");
         final MenuItem exitMenuItem = new MenuItem("Exit");
-        fileMenu.getItems().addAll(newMenuItem, importMenuItem, exportMenuItem, exitMenuItem);
+        fileMenu.getItems().addAll(newMenuItem, openMenuItem, saveMenuItem, importMenuItem, exportMenuItem, exitMenuItem);
         menuBar.getMenus().add(fileMenu);
 
         // Bind menu bar width to window width so it doesn't cut off and look weird when window is resized
@@ -169,8 +169,30 @@ public class PixelEditorUi extends Application {
             }
         });
 
+        openMenuItem.setOnAction(e -> {
+            File file = fileChooser.showOpenProjectDialog(primaryStage);
+            try {
+                fileService.openProject(file);
+            } catch (IOException ex) {
+            }
+        });
+
+        saveMenuItem.setOnAction(e -> {
+            File file = fileChooser.showSaveProjectDialog(primaryStage);
+            try {
+                fileService.saveProject(file);
+            } catch (FileNotFoundException ex) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("An error occured");
+                alert.setContentText("File not found.");
+                alert.showAndWait();
+            } catch (IOException ex) {
+            }
+        });
+
         importMenuItem.setOnAction(e -> {
-            File file = imageFileChooser.showOpenDialog(primaryStage);
+            File file = fileChooser.showOpenImageDialog(primaryStage);
             try {
                 fileService.importFrom(file);
             } catch (IOException ex) {
@@ -183,8 +205,8 @@ public class PixelEditorUi extends Application {
         });
 
         exportMenuItem.setOnAction(e -> {
-            File file = imageFileChooser.showSaveDialog(primaryStage);
-            String extension = imageFileChooser.getSelectedExtensionAsString();
+            File file = fileChooser.showSaveImageDialog(primaryStage);
+            String extension = fileChooser.getSelectedExtensionAsString();
             try {
                 boolean success = fileService.exportTo(file, extension);
                 if (!success) {

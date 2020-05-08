@@ -1,5 +1,7 @@
 package pixeleditor.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -137,5 +139,34 @@ public class CanvasService {
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(fillColor);
         return combinedCanvas.snapshot(params, null);
+    }
+
+    /**
+     * Returns layers as a list of WritableImages.
+     * @return layers as a list of WritableImages
+     */
+    public static List<WritableImage> getLayersAsImages() {
+        SnapshotParameters params = new SnapshotParameters();
+        params.setFill(Color.TRANSPARENT);
+
+        List<WritableImage> images = new ArrayList<>();
+        for (Canvas layer : layers) {
+            images.add(layer.snapshot(params, null));
+        }
+        return images;
+    }
+
+    /**
+     * Draws an image to a specified layer.
+     * @param image image to draw
+     * @param index layer number
+     */
+    public static void drawImageToLayer(Image image, int index) {
+        double height = image.getHeight();
+        double width = image.getWidth();
+        layers[index].setHeight(height);
+        layers[index].setWidth(width);
+        layers[index].getGraphicsContext2D().clearRect(0, 0, width, height);
+        layers[index].getGraphicsContext2D().drawImage(image, 0, 0);
     }
 }
