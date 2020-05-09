@@ -173,7 +173,8 @@ public class PixelEditorUi extends Application {
             File file = fileChooser.showOpenProjectDialog(primaryStage);
             try {
                 fileService.openProject(file);
-            } catch (IOException ex) {
+            } catch (Exception ex) {
+                new Alert(AlertType.ERROR, "Project could not be opened.").show();
             }
         });
 
@@ -182,12 +183,9 @@ public class PixelEditorUi extends Application {
             try {
                 fileService.saveProject(file);
             } catch (FileNotFoundException ex) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("An error occured");
-                alert.setContentText("File not found.");
-                alert.showAndWait();
-            } catch (IOException ex) {
+                new Alert(AlertType.ERROR, "File not found.").show();
+            } catch (Exception ex) {
+                new Alert(AlertType.ERROR, "Project could not be saved.").show();
             }
         });
 
@@ -195,12 +193,8 @@ public class PixelEditorUi extends Application {
             File file = fileChooser.showOpenImageDialog(primaryStage);
             try {
                 fileService.importFrom(file);
-            } catch (IOException ex) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("An error occured");
-                alert.setContentText("An error occured while opening file.");
-                alert.showAndWait();
+            } catch (Exception ex) {
+                new Alert(AlertType.ERROR, "Image could not be opened.").show();
             }
         });
 
@@ -208,20 +202,9 @@ public class PixelEditorUi extends Application {
             File file = fileChooser.showSaveImageDialog(primaryStage);
             String extension = fileChooser.getSelectedExtensionAsString();
             try {
-                boolean success = fileService.exportTo(file, extension);
-                if (!success) {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("An error occured");
-                    alert.setContentText("An error occured while exporting the image.");
-                    alert.showAndWait();
-                }
-            } catch (IOException ex) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("An error occured");
-                alert.setContentText("An error occured while writing to file.");
-                alert.showAndWait();
+                fileService.exportTo(file, extension);
+            } catch (Exception ex) {
+                new Alert(AlertType.ERROR, "Image could not be saved.").show();
             }
         });
 

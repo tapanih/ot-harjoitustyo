@@ -34,6 +34,11 @@ public class BucketFillTool extends Tool {
     @Override
     public void mouseReleased(MouseEvent e) {
         Point point = new Point((int) e.getX(), (int) e.getY());
+        int height = CanvasService.getHeight();
+        int width = CanvasService.getWidth();
+        if (point.getX() < 0 || point.getY() < 0 || point.getX() >= width || point.getY() >= height) {
+            return;
+        }
         Color replacement = ColorService.getCurrentColor();
         floodFill(point, replacement);
     }

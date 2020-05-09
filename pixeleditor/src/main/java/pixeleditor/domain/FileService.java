@@ -91,10 +91,9 @@ public class FileService {
      * Exports canvas to a selected image file.
      * @param file image file
      * @param selectedExtension extension selected in the save dialog
-     * @return true if exporting was successful, false otherwise
      * @throws java.io.IOException throws IOException if file could not be saved
      */
-    public boolean exportTo(File file, String selectedExtension) throws IOException {
+    public void exportTo(File file, String selectedExtension) throws IOException {
         WritableImage image;
         BufferedImage bimg = null;
         if (file != null) {
@@ -115,8 +114,7 @@ public class FileService {
             } else {
                 image = CanvasService.getCanvasAsImage(Color.TRANSPARENT);
             }
-            return ImageIO.write(SwingFXUtils.fromFXImage(image, bimg), extension, file);
+            ImageIO.write(SwingFXUtils.fromFXImage(image, bimg), extension, file);
         }
-        return false;
     }
 }
