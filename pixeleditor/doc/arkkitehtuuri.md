@@ -16,7 +16,7 @@ Käyttöliittymä koostuu yhdestä päänäkymästä ja dialogi-ikkunoista. Käy
 
 Piirtoalue on määritelty JavaFX:n *Canvas*-olion avulla.
 
-Käyttöliittymä on pyritty eristämään sovelluslogiikasta, mutta sovelluksen luonteesta johtuen sovelluslogiikka on jossain määrin riippuvainen käyttöliittymän *Canvas*-oliosta. Pääsyä olioon on kuitenkin yritetty rajoittaa *CanvasService*-luokan avulla, jonka metodeilla sitä voi muokata.
+Käyttöliittymä on pyritty eristämään sovelluslogiikasta, mutta sovelluksen luonteesta johtuen sovelluslogiikka on jossain määrin riippuvainen käyttöliittymän *Canvas*-olioista. Pääsyä olioihin on kuitenkin yritetty rajoittaa *CanvasService*-luokan avulla, jonka metodeilla niitä voi muokata.
 
 ## Sovelluslogiikka
 
