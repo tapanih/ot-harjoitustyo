@@ -73,3 +73,11 @@ Värin valinta käyttää JavaFX:n valmista ColorPicker-luokkaa.
 #### Sankkotäyttö
 
 Sankkotäyttö käyttää jonoon perustuvaa *flood-fill*-algoritmin toteutusta. Algoritmista löytyy lisätietoja Wikipediasta: https://en.wikipedia.org/wiki/Flood_fill
+
+### Pysyväistallennus
+
+Projektin tallennusformaatti on ZIP-tiedosto, joka sisältää piirtotasot PNG-kuvaformaatissa. Näiden kuvatiedostojen nimet ovat numeroitu alkaen nimestä *layer0.png*. Tasot voi myös litistää yhdeksi kuvatiedostoksi, jonka formaatti voi olla PNG, BMP, GIF tai TIFF.
+
+## Ohjelman rakenteeseen jääneet heikkoudet
+
+Ohjelmassa on kohtuullinen verran kovakoodattuja arvoja ja erityisesti tasosysteemin toteutus on hyvin jäykkä. Mahdollinen jatkokehitys vaatii paljon refaktorointia.

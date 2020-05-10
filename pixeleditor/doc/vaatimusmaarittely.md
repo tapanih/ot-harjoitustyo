@@ -4,28 +4,24 @@
 
 Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia muutamassa kuvaformaatissa.
 
-### Suunnitellut toiminnallisuudet
+### Toteutetut toiminnallisuudet
 
 - Työkalut:
-    - kynä (tehty)
-    - pyyhekumi (tehty)
-    - värin valinta (tehty)
-    - sankkotäyttö (tehty)
-- Työkalujen valinta painamalla sivupalkissa olevia nappeja (tehty)
-- Uuden kuvan luominen ja sen koon valinta (tehty)
-- Kuvan tallennus eri kuvaformaateihin
-    - PNG (tehty)
-    - BMP (tehty, mutta läpinäkyvyyden kanssa ongelmia)
-    - GIF (tehty, mutta läpinäkyvyyden kanssa ongelmia)
-    - TIFF (tehty)
-- Kuvan tuominen sovellukseen eri kuvaformaateista:
-    - PNG (tehty)
-    - BMP (tehty, mutta läpinäkyvyyden kanssa ongelmia)
-    - GIF (tehty, mutta läpinäkyvyyden kanssa ongelmia)
-    - TIFF
+    - kynä
+    - pyyhekumi
+    - värin valinta
+    - sankkotäyttö
+- Työkalujen valinta painamalla sivupalkissa olevia nappeja
+- Uuden kuvan luominen ja sen koon valinta
+- Projektin tallentaminen ja avaaminen
+- Kuvan tallennus eri kuvaformaateihin (PNG, BMP; GIF, TIFF)
+- Kuvan tuominen sovellukseen eri kuvaformaateista (PNG, BMP, TIFF)
+- Yksinkertainen piirtotasosysteemi
 
 ### Jatkokehitysideoita
 
-Näitä toteutetaan, jos aikaa riittää.
+Sovellusta voisi sen luonteen vuoksi parantaa loputtomasti. Tässä muutamia ideoita:
+
+- Työkalujen asetusten säätö (esim. pensselin koko)
 - Historia (undo & redo)
 - Zoomaussäädin
