@@ -12,6 +12,8 @@ Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia 
 
 [Käyttöohje](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/kayttoohje.md)
 
+[Testausdokumentti](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/testausdokumentti.md)
+
 [Tuntikirjanpito](https://github.com/tapanih/ot-harjoitustyo/blob/master/pixeleditor/doc/tuntikirjanpito.md)
 
 ## Releaset
@@ -19,6 +21,8 @@ Sovellus on yksinkertainen piirto-ohjelma, jolla voi muokata ja tallentaa kuvia 
 [Viikko 5](https://github.com/tapanih/ot-harjoitustyo/releases/tag/viikko5)
 
 [Viikko 6](https://github.com/tapanih/ot-harjoitustyo/releases/tag/viikko6)
+
+[Loppupalautus](https://github.com/tapanih/ot-harjoitustyo/releases/tag/loppupalautus)
 
 ## Komentorivitoiminnot
 
