@@ -26,4 +26,4 @@ Sovelluksen järjestelmätestaus on suoritettu manuaalisesti käymällä läpi m
 
 ## Sovelluksen laatuongelmat
 
-Sovelluksen antamat virheilmoitukset eivät ole kovin kuvaavia. Projektin avaaminen antaa mystisen varoituksen terminaaliin jostain Javan syövereistä.
+Sovelluksen antamat virheilmoitukset eivät ole kovin kuvaavia. Projektin avaaminen tulostaa varoituksen, joka tulee jostain Javan syövereistä.

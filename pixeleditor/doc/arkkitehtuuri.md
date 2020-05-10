@@ -9,7 +9,7 @@ Pakkaus *pixeleditor.ui* sisältää JavaFX:llä toteutetun käyttöliittymän j
 Käyttöliittymä koostuu yhdestä päänäkymästä ja dialogi-ikkunoista. Käyttöliittymän koodi on jaettu useampaan luokkaan.
 
 - *ColorChooser* käärii JavaFX:n *ColorPicker*-olion ja yhdistää sen *ColorService*-luokkaan.
-- *ImageFileChooser* käärii kaksi JavaFX:n *FileChooser*-luokkaa, joita käytetään tiedoston avaamiseen ja tallentamiseen. *FileChooser*-luokille asetetaan konstruktorissa sopivat tiedostopäätteet. Metodi *getSelectedExtensionAsString* palauttaa viimeksi valitun tiedostopäätteen kirjainosan.
+- *FileChoosers* käärii sisäänsä useita JavaFX:n *FileChooser*-luokkia, joita käytetään tiedoston avaamiseen ja tallentamiseen. *FileChooser*-luokille asetetaan konstruktorissa sopivat tiedostopäätteet. Metodi *getSelectedExtensionAsString* palauttaa viimeksi valitun tiedostopäätteen kirjainosan.
 - *NewImageDialog* määrittelee uuden kuvan luomiseen käytettävän ikkunan.
 - *PixelEditorUi* määrittää päänäkymän, joka sisältää piirtoalueen, työkalupalkin ja ylävalikon.
 - *ToolButton* perii JavaFX:n *ToggleButton*-luokan. Tavallisen toiminnallisuuden lisäksi luokan oliot tietävät, mille työkalulle ne kuuluvat.
@@ -22,7 +22,7 @@ Käyttöliittymä on pyritty eristämään sovelluslogiikasta, mutta sovelluksen
 
 Sovelluslogiikka koostuu useista eri luokista, joilla on omat vastuualueensa.
 
-Staattinen luokka *CanvasService* tarjoaa metodeja, jotka antavat muille sovelluslogiikan luokille rajoitetun pääsyn käyttöliittymän *Canvas*-olioon. Esimerkiksi eri työkalut voivat muokata sen avulla piirtoaluetta.
+Staattinen luokka *CanvasService* tarjoaa metodeja, jotka antavat muille sovelluslogiikan luokille rajoitetun pääsyn käyttöliittymän eri piirtotasoja kuvaavia *Canvas*-olioita. Esimerkiksi eri työkalut voivat muokata sen avulla piirtoaluetta.
 
 Staattinen luokka *ColorService* tarjoaa metodeja, joilla voi hakea ja asettaa valittuna olevan värin. Luokka sisältää myös tiedon käyttöliittymän *ColorPicker*-oliosta ja huolehtii, että sen väriarvo pysyy synkronoituna.
 
